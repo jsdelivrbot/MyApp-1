@@ -1,0 +1,31 @@
+page-profile {
+
+.profilePic {
+  width: 150px;
+  height:150px;
+}
+
+.profileDescription {
+  opacity: 0.5;
+  padding-left: 15px;
+}
+
+.profileRelationshipPicker {
+  padding-left:0px;
+  width:98%;
+}
+
+.profileDescriptionText{
+  display:inline-block;
+  min-height: 100px;
+  height: 50%;
+  width:98%;
+  padding-left: 5px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+}

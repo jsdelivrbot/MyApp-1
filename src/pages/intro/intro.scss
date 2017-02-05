@@ -1,0 +1,77 @@
+page-intro {
+
+  .slide-zoom {
+    height: 100%;
+    }
+
+  .slide-title {
+    margin-top: 2.8rem;
+  }
+
+  .slide-image {
+    height: 100%;
+    width: 100%;
+    }
+
+  .swiper-pagination-bullet-active {
+    background: #9b59b6;
+    }
+
+  .button-overlay {
+    position: fixed;
+    width: 80%;
+    height: 10%;
+    background: rgba(0,0,0,0);
+    z-index: 20;
+    top: 70%;
+    left: 10%;
+    }
+
+  .signup-overlay {
+    position: fixed;
+    width: 80%;
+    height: 10%;
+    background: rgba(0,0,0,0);
+    z-index: 20;
+    top: 7%;
+    left: 65%;
+    }
+
+    .signupbtn{
+
+    }
+
+  .text-overlay {
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background: rgba(0,0,0,0.5);
+    z-index: 20;
+    top: 7%;
+    left: 10%;
+    }
+
+
+   .intro-text {
+    color: #ffffff;
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background: rgba(0,0,0,0);
+    z-index: 21;
+    top: 5%;
+    left: 10%;
+    }
+
+  .icon-margin:before {
+    margin: 50% -50%;
+    padding-right: 90%;
+    }
+
+  .loginbtn {
+    opacity: 0.8;
+    }
+
+
+
+}

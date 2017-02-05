@@ -1,0 +1,70 @@
+<!--
+  Generated template for the Accommodationdetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="amethyst">
+    <ion-title align="center">{{accommodation.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<br>
+<ion-item color="amethyst">
+  Location:
+</ion-item>
+
+<ion-card>
+
+  <ion-item>
+    <ion-icon color="amethyst" name="compass" item-left large></ion-icon>
+    <h2>{{accommodation.name}}</h2>
+    <p>{{accommodation.address}}</p>
+    <button ion-button icon-left clear item-right>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item>
+
+
+</ion-card>
+
+<ion-item color="amethyst">
+  Website:
+</ion-item>
+
+<ion-card>
+
+  <ion-item>
+    <ion-icon color="amethyst" name="link" item-left large></ion-icon>
+    <button ion-button clear item-left>
+      {{accommodation.website}}
+    </button>
+
+  </ion-item>
+
+
+</ion-card>
+
+
+<ion-item color="amethyst">
+  Description:
+</ion-item>
+
+<ion-card>
+
+  <ion-item text-wrap>
+    <ion-icon color="amethyst" name="information-circle" item-left large></ion-icon>
+    <p>{{accommodation.description}}</p>
+
+  </ion-item>
+
+
+</ion-card>
+
+</ion-content>
