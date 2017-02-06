@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { ProfileData } from '../../providers/profile-data';
+import { AuthService } from '../../providers/auth-service';
+
 import {TabsPage} from '../tabs/tabs';
 
 /*
@@ -15,19 +18,19 @@ import {TabsPage} from '../tabs/tabs';
 })
 export class ProfilePage {
   tabsPage = TabsPage;
+  public userProfile: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData) {
+  this.profileData = profileData;
+  this.profileData.getUserProfile().on('value', (data) => {
+      this.userProfile = data.val();
+    });
   }
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-  goBack() {
 
-
-    }
 
 }

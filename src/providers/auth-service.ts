@@ -13,22 +13,22 @@ import firebase from 'firebase';
 @Injectable()
 export class AuthService {
   public fireAuth: any;
-  public userData: any;
+  public userProfile: any;
 
   constructor(public http: Http) {
     console.log('Hello AuthService Provider');
     this.fireAuth = firebase.auth();
-    this.userData = firebase.database().ref('/userData');
+    this.userProfile = firebase.database().ref('/userProfile');
   }
 
   doLogin(email: string, password: string): any {
   return this.fireAuth.signInWithEmailAndPassword(email, password);
 }
 
-  register(email: string, password: string): any {
+  register(email: string, firstname: string, lastname: string, password: string): any {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((newUser) => {
-        this.userData.child(newUser.uid).set({email: email});
+        this.userProfile.child(newUser.uid).set({email: email, firstname: firstname, lastname: lastname});
     });
   }
 

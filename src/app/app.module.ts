@@ -21,6 +21,7 @@ import { IntroPage } from '../pages/intro/intro';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { AuthService } from '../providers/auth-service';
+import { ProfileData } from '../providers/profile-data';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import firebase from 'firebase';
 
@@ -92,6 +93,6 @@ const cloudSettings: CloudSettings = {
     IntroPage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ProfileData]
 })
 export class AppModule {}

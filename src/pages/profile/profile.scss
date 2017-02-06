@@ -1,18 +1,29 @@
 page-profile {
 
 .profilePic {
+  text-align: center;
   width: 150px;
   height:150px;
 }
 
+.profileName {
+font-size: x-large;
+
+}
+
+.profileEmail {
+font-size: large;
+
+}
+
 .profileDescription {
   opacity: 0.5;
-  padding-left: 15px;
+  padding-left: 0px;
 }
 
 .profileRelationshipPicker {
   padding-left:0px;
-  width:98%;
+  width: 100%;
 }
 
 .profileDescriptionText{

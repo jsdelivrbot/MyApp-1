@@ -13,55 +13,74 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons right>
-      <button ion-button clear>Save
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-  <div align="center">
+  <div>
   <br>
-  <ion-avatar>
-      <img src="assets/images/profile_avatar.png" class="profilePic">
-    </ion-avatar>
+
+  <div align="center">
+  <ion-card>
+  <img src="assets/images/profile_avatar.png" class="profilePic"/><br>
+  </ion-card>
+  </div>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon color="amethyst" name="person" item-left large></ion-icon>
+        <h2 align="center" class="profileName">{{userProfile?.firstname}} {{userProfile?.lastname}}</h2>
+        <button ion-button icon-left clear item-right>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon color="amethyst" name="mail" item-left large></ion-icon>
+        <h2 align="center" class="profileEmail">{{userProfile?.email}}</h2>
+        <button ion-button icon-left clear item-right>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon color="amethyst" name="people" item-left large></ion-icon>
+        <h2 align="center" class="profileRelationship">{{userProfile?.relationship}}</h2>
+        <button ion-button icon-left clear item-right>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon color="amethyst" name="paper" item-left large></ion-icon>
+        <p class="profileDescription">Tell everyone about yourself:</p>
+        <button ion-button icon-left clear item-right>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item>
+    </ion-card>
+
+  <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          <p class="profileDescription">About you:</p>
+          <p>{{userProfile?.description}}</p>
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+
   </div><br>
-
-  <div class="lastActiveTime" align="center">
-user account goes here
-  </div><br>
-
-  <div class="lastActiveTime" align="center">
-  Active 2h ago
-  </div><br>
-
-  <div class="profileRelationshipPicker" align="center">
-  <ion-list>
-  <ion-item>
-    <ion-label>Relationship to couple</ion-label>
-    <ion-select [(ngModel)]="relationshiptocouple">
-      <ion-option value="groomsman">Groomsman</ion-option>
-      <ion-option value="bridesmaid">Bridesmaid</ion-option>
-      <ion-option value="bestman">Best man</ion-option>
-      <ion-option value="maidofhonor">Maid of honor</ion-option>
-      <ion-option value="family">Family</ion-option>
-      <ion-option value="guest">Guest</ion-option>
-    </ion-select>
-  </ion-item>
-</ion-list>
-  </div><br>
-
-    <div class="profileDescription" align="left">
-  Tell everyone about yourself:
-  </div><br>
-
-   <div padding-left="1px">
-   <textarea class="profileDescriptionText"></textarea>
-  </div><br>
-
-
 
 </ion-content>

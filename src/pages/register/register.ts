@@ -18,6 +18,8 @@ export class RegisterPage {
 
   public registerForm;
   emailChanged: boolean = false;
+  firstnameChanged: boolean = false;
+  lasnameChanged: boolean = false;
   passwordChanged: boolean = false;
   fullnameChanged: boolean = false;
   submitAttempt: boolean = false;
@@ -27,6 +29,8 @@ export class RegisterPage {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
+      firstname: ['', Validators.compose([Validators.required])],
+      lastname: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
@@ -42,7 +46,7 @@ export class RegisterPage {
     if (!this.registerForm.valid){
       console.log(this.registerForm.value);
     } else {
-      this.authService.register(this.registerForm.value.email, this.registerForm.value.password).then( authService => {
+      this.authService.register(this.registerForm.value.email, this.registerForm.value.firstname, this.registerForm.value.lastname, this.registerForm.value.password).then( authService => {
         let alert = this.alertCtrl.create({
           title: 'You are Registered!',
           subTitle: 'Get ready to share wedding adventures with friends and family!',

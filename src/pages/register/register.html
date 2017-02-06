@@ -25,6 +25,28 @@
     <ion-item class="error-message" *ngIf="!registerForm.controls.email.valid  && (emailChanged || submitAttempt)">
       <p>Please enter a valid email.</p>
     </ion-item>
+
+    <ion-item>
+      <ion-label stacked>First Name</ion-label>
+      <ion-input #firstname formControlName="firstname" type="text" (change)="elementChanged(firstname)"
+        placeholder="First Name"
+        [class.invalid]="!registerForm.controls.firstname.valid && (firstnameChanged || submitAttempt)"></ion-input>
+     </ion-item>
+     <ion-item class="error-message" *ngIf="!registerForm.controls.firstname.valid && (firstnameChanged || submitAttempt)">
+      <p>Please enter a First Name</p>
+      </ion-item>
+
+      <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input #lastname formControlName="lastname" type="text" (change)="elementChanged(lastname)"
+        placeholder="Last Name"
+        [class.invalid]="!registerForm.controls.lastname.valid && (lastnameChanged || submitAttempt)"></ion-input>
+     </ion-item>
+     <ion-item class="error-message" *ngIf="!registerForm.controls.lastname.valid && (lastnameChanged || submitAttempt)">
+      <p>Please enter a Last Name</p>
+      </ion-item>
+
+
     <ion-item>
       <ion-label stacked>Password</ion-label>
       <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)"
@@ -34,6 +56,7 @@
     <ion-item class="error-message" *ngIf="!registerForm.controls.password.valid  && (passwordChanged || submitAttempt)">
       <p>Your password needs more than 6 characters.</p>
     </ion-item>
+
     <!--<ion-item>
       <ion-label stacked>Full Name</ion-label>
       <ion-input #fullname formControlName="fullname" type="text" (change)="elementChanged(fullname)"
@@ -43,6 +66,7 @@
     <ion-item class="error-message" *ngIf="!registerForm.controls.fullname.valid  && (fullnameChanged || submitAttempt)">
       <p>Your full name can't empty.</p>
     </ion-item>-->
+
     <button ion-button block color="amethyst" type="submit">
       Signup
     </button>
