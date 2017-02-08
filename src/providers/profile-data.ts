@@ -25,10 +25,10 @@ export class ProfileData {
     return this.userProfile.child(this.currentUser.uid);
   }
 
-  updateName(firstName: string, lastName: string): any {
+  updateName(firstname: string, lastname: string): any {
     return this.userProfile.child(this.currentUser.uid).update({
-      firstName: firstName,
-      lastName: lastName,
+      firstname: firstname,
+      lastname: lastname,
     });
   }
 
@@ -39,6 +39,18 @@ export class ProfileData {
       });
     }, (error) => {
       console.log(error);
+    });
+  }
+
+  updateRelationship(data: string): any {
+    return this.userProfile.child(this.currentUser.uid).update({
+      relationship: data,
+    });
+  }
+
+  updateDescription(description: string): any {
+    return this.userProfile.child(this.currentUser.uid).update({
+      description: description,
     });
   }
 

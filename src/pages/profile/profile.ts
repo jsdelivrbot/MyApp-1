@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { ProfileData } from '../../providers/profile-data';
 import { AuthService } from '../../providers/auth-service';
@@ -19,9 +19,11 @@ import {TabsPage} from '../tabs/tabs';
 export class ProfilePage {
   tabsPage = TabsPage;
   public userProfile: any;
+  testRadioOpen: boolean;
+  public relationship: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData, public alertCtrl: AlertController) {
   this.profileData = profileData;
   this.profileData.getUserProfile().on('value', (data) => {
       this.userProfile = data.val();
@@ -31,6 +33,133 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
+
+  updateName(){
+  let alert = this.alertCtrl.create({
+    message: "Update your first name & last name",
+    inputs: [
+      {
+        name: 'firstname',
+        placeholder: 'Your first name',
+        value: this.userProfile.firstname
+      },
+      {
+        name: 'lastname',
+        placeholder: 'Your last name',
+        value: this.userProfile.lastname
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.profileData.updateName(data.firstname, data.lastname);
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+updateEmail(){
+  let alert = this.alertCtrl.create({
+    inputs: [
+      {
+        name: 'newEmail',
+        placeholder: 'Update your new email',
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.profileData.updateEmail(data.newEmail);
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+updateRelationship(){
+  let alert = this.alertCtrl.create();
+    alert.setTitle('Relationship to couple:');
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Bridesmaid',
+      value: 'Bridesmaid',
+      checked: false
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Groomsmen',
+      value: 'Groomsmen'
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Family',
+      value: 'Family'
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Friend',
+      value: 'Friend'
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Guest',
+      value: 'Guest'
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        this.testRadioOpen = false;
+        this.profileData.updateRelationship(data);
+      }
+    });
+
+    alert.present().then(() => {
+      this.testRadioOpen = true;
+    });
+  }
+
+  updateDescription(){
+  let alert = this.alertCtrl.create({
+    message: "Tell everyone about yourself:",
+    inputs: [
+      {
+        name: 'description',
+        placeholder: 'About you:',
+        value: this.userProfile.description
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.profileData.updateDescription(data.description);
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
 
 }

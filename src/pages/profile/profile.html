@@ -32,7 +32,7 @@
       <ion-item>
         <ion-icon color="amethyst" name="person" item-left large></ion-icon>
         <h2 align="center" class="profileName">{{userProfile?.firstname}} {{userProfile?.lastname}}</h2>
-        <button ion-button icon-left clear item-right>
+        <button ion-button icon-left clear item-right (click)="updateName()">
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
@@ -43,7 +43,7 @@
       <ion-item>
         <ion-icon color="amethyst" name="mail" item-left large></ion-icon>
         <h2 align="center" class="profileEmail">{{userProfile?.email}}</h2>
-        <button ion-button icon-left clear item-right>
+        <button ion-button icon-left clear item-right (click)="updateEmail()">
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
@@ -54,7 +54,7 @@
       <ion-item>
         <ion-icon color="amethyst" name="people" item-left large></ion-icon>
         <h2 align="center" class="profileRelationship">{{userProfile?.relationship}}</h2>
-        <button ion-button icon-left clear item-right>
+        <button ion-button icon-left clear item-right (click)="updateRelationship()">
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
@@ -65,7 +65,7 @@
       <ion-item>
         <ion-icon color="amethyst" name="paper" item-left large></ion-icon>
         <p class="profileDescription">Tell everyone about yourself:</p>
-        <button ion-button icon-left clear item-right>
+        <button ion-button icon-left clear item-right (click)="updateDescription()">
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
