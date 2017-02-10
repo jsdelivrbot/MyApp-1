@@ -24,7 +24,8 @@
 
   <div align="center">
   <ion-card>
-  <img src="assets/images/profile_avatar.png" class="profilePic"/><br>
+  <!--<img src="assets/images/profile_avatar.png" class="profilePic"/><br>-->
+  <img src="{{userProfile?.photoURL}}" class="action-sheets-basic-page" (click)="profilePicActionSheet()"/>
   </ion-card>
   </div>
 

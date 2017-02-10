@@ -2,8 +2,8 @@ page-profile {
 
 .profilePic {
   text-align: center;
-  width: 150px;
-  height:150px;
+  width: 50%;
+  height:50%;
 }
 
 .profileName {
@@ -41,4 +41,26 @@ font-size: large;
 
 $alert-ios-content-max-height: 500px;
 
+.action-sheets-basic-page {
+  text-align: center;
+  width: 50%;
+  height:50%;
+
+  .ion-md-share {
+    color: #ED4248;
+  }
+  .ion-md-arrow-dropright-circle {
+    color: #508AE4;
+  }
+  .ion-md-heart-outline {
+    color: #31D55F;
+  }
+  .action-sheet-cancel ion-icon,
+  .action-sheet-destructive ion-icon {
+    color: #757575;
+  }
 }
+
+}
+
+
