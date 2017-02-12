@@ -22,6 +22,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AuthService } from '../providers/auth-service';
 import { ProfileData } from '../providers/profile-data';
+
+
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import firebase from 'firebase';
 

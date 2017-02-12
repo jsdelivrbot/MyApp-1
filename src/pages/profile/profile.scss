@@ -46,17 +46,17 @@ $alert-ios-content-max-height: 500px;
   width: 50%;
   height:50%;
 
-  .ion-md-share {
+.platform-android .ion-md-camera {
     color: #ED4248;
   }
-  .ion-md-arrow-dropright-circle {
+.platform-android .ion-md-images {
     color: #508AE4;
   }
-  .ion-md-heart-outline {
+.platform-android .ion-md-heart-outline {
     color: #31D55F;
   }
-  .action-sheet-cancel ion-icon,
-  .action-sheet-destructive ion-icon {
+.platform-android .action-sheet-cancel ion-icon,
+.platform-android .action-sheet-destructive ion-icon {
     color: #757575;
   }
 }

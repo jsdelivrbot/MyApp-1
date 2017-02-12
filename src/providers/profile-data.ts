@@ -25,6 +25,12 @@ export class ProfileData {
     return this.userProfile.child(this.currentUser.uid);
   }
 
+  updateProfilePic(photoURL: any): any {
+    return this.userProfile.child(this.currentUser.uid).update({
+      photoURL: photoURL,
+    });
+  }
+
   updateName(firstname: string, lastname: string): any {
     return this.userProfile.child(this.currentUser.uid).update({
       firstname: firstname,
