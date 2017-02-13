@@ -13,6 +13,9 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
+    <span class="loadingHeader">
+    <ion-spinner color="amethyst-reverse" *ngIf=""></ion-spinner>
+    </span>
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +28,8 @@
   <div align="center">
   <ion-card>
   <!--<img src="assets/images/profile_avatar.png" class="profilePic"/><br>-->
-  <img src="{{userProfile?.photoURL}}" class="action-sheets-basic-page" (click)="profilePicActionSheet()"/>
+    <ion-img src="{{userProfile?.photoURL}}" class="action-sheets-basic-page" (click)="profilePicActionSheet()">
+    </ion-img>
   </ion-card>
   </div>
 

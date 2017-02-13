@@ -7,6 +7,8 @@ import { Transfer } from 'ionic-native';
 
 import { ProfileData } from '../../providers/profile-data';
 import { AuthService } from '../../providers/auth-service';
+import { LoadingProvider } from '../../providers/loading';
+
 import firebase from 'firebase';
 
 import {TabsPage} from '../tabs/tabs';
@@ -35,10 +37,13 @@ export class ProfilePage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public platform: Platform, public loadingProvider: LoadingProvider) {
+  this.loadingProvider.show();
   this.profileData = profileData;
   this.profileData.getUserProfile().on('value', (data) => {
       this.userProfile = data.val();
+      this.loadingProvider.hide();
     });
 
   }
@@ -54,12 +59,13 @@ export class ProfilePage {
   //console.log(Device)
   //let imageSource = (Device.isVirtual ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA);
 
+  this.loadingProvider.show();
   Camera.getPicture({
     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: Camera.DestinationType.FILE_URI,
     quality: 100,
-    targetWidth: 500,
-    targetHeight: 500,
+    targetWidth: 150,
+    targetHeight: 150,
     encodingType: Camera.EncodingType.JPEG,
     correctOrientation: true
   }).then((_imagePath) => {
@@ -82,6 +88,7 @@ export class ProfilePage {
   }, (_error) => {
     alert('Error ' + (_error.message || _error));
   });
+
 }
 
 makeFileIntoBlob(_imagePath) {
@@ -111,7 +118,7 @@ makeFileIntoBlob(_imagePath) {
 }
 
 uploadToFirebase(_imageBlob) {
-  var fileName = 'sample-' + new Date().getTime() + '.jpg';
+  var fileName = 'profilePic' + '.jpg';
 
   return new Promise((resolve, reject) => {
     var fileRef = firebase.storage().ref('/userProfile/' + this.profileData.currentUser.uid + '/' + fileName);
@@ -132,6 +139,7 @@ uploadToFirebase(_imageBlob) {
 saveToUserProfile(_uploadSnapshot) {
   this.photoURL = _uploadSnapshot.downloadURL;
   this.profileData.updateProfilePic(this.photoURL);
+  this.loadingProvider.hide();
 
 }
 

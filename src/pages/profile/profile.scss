@@ -6,13 +6,18 @@ page-profile {
   height:50%;
 }
 
+
+
+$loading-ios-spinner-crescent-color: #9b59b6;
+$loading-md-spinner-crescent-color: #9b59b6;
+
 .profileName {
-font-size: x-large;
+  font-size: x-large;
 
 }
 
 .profileEmail {
-font-size: large;
+  font-size: large;
 
 }
 
@@ -43,8 +48,8 @@ $alert-ios-content-max-height: 500px;
 
 .action-sheets-basic-page {
   text-align: center;
-  width: 50%;
-  height:50%;
+  width: 150px;
+  height:150px;
 
 .platform-android .ion-md-camera {
     color: #ED4248;
