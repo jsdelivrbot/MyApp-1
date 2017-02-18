@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {PlaylistdetailsPage} from '../playlistdetails/playlistdetails';
+
+
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
+
 
 /*
   Generated class for the Playlist page.
@@ -11,12 +16,23 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-playlist',
   templateUrl: 'playlist.html'
 })
-export class PlaylistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
+export class PlaylistPage {
+	songs: FirebaseListObservable<any>;
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
+	this.songs = af.database.list('/Songs');
+  }
+
+    goToPlaylistDetails(song){
+		this.navCtrl.push(PlaylistdetailsPage, { song: song });
+	}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaylistPage');
   }
+
 
 }

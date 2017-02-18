@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams} from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
 
 import {LoginPage} from '../login/login';
 import {RegisterPage} from '../register/register';
@@ -18,7 +19,10 @@ export class IntroPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  StatusBar.hide();
+  }
 
 
   ionViewDidLoad() {

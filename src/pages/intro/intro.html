@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 
-<ion-content class="IntroPage">
+<ion-content class="no-scroll">
 
   <ion-slides pager>
     <ion-slide>
@@ -30,18 +30,18 @@
   </ion-slides>
 
 <div class="signup-overlay" padding>
-<button ion-button outline color="light" class="signupbtn" (click)="goToSignupPage()">Signup</button>
+<button ion-button small outline color="light" class="signupbtn" (click)="goToSignupPage()">Signup</button>
 </div>
 
 
 
-  <div class="button-overlay" padding>
+  <div class="button-overlay">
     <button ion-button block color="light" class="loginbtn" icon-left (click)="goToLoginPage()">
-        <ion-icon class="icon-margin" name="mail"></ion-icon>Login with Email</button><br>
+        <ion-icon class="icon-margin" name="mail"></ion-icon>Login with Email</button><p></p>
     <button ion-button block color="positive" class="loginbtn" icon-left (click)="goToLoginPage()">
-        <ion-icon class="icon-margin" name="facebook"></ion-icon>Login with Facebook</button><br>
+        <ion-icon class="icon-margin" name="facebook"></ion-icon>Login with Facebook</button><p></p>
     <button ion-button block color="danger" class="loginbtn" icon-left (click)="goToLoginPage()">
-        <ion-icon class="icon-margin" name="google"></ion-icon>Login with Google</button><br>
+        <ion-icon class="icon-margin" name="google"></ion-icon>Login with Google</button>
   </div>
 
 
