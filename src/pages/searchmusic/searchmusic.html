@@ -1,0 +1,42 @@
+<!--
+  Generated template for the Searchmusic page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="amethyst" align="center">
+    <ion-title>Search Music</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<form [formGroup]="searchForm" (submit)="searchMusic()" novalidate>
+    <ion-item>
+      <ion-label stacked >Song</ion-label>
+      <ion-input #song formControlName="song" type="text" (change)="elementChanged(song)"
+        placeholder="Enter a song title"
+        [class.invalid]="!searchForm.controls.song.valid && (songChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!searchForm.controls.song.valid  && (songChanged || submitAttempt)">
+      <p>You must enter the name of the song.</p>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Artist</ion-label>
+      <ion-input #artist formControlName="artist" type="text" (change)="elementChanged(artist)"
+        placeholder="Enter the artists name"
+        [class.invalid]="!searchForm.controls.artist.valid && (artistChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!searchForm.controls.artist.valid  && (artistChanged || submitAttempt)">
+      <p>You must enter the name of the artist.</p>
+    </ion-item>
+    <button color="amethyst" ion-button block type="submit">
+      Search
+    </button>
+  </form>
+
+</ion-content>

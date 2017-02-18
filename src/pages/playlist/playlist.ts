@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {PlaylistdetailsPage} from '../playlistdetails/playlistdetails';
+import {SearchmusicPage} from '../searchmusic/searchmusic';
 
 
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
@@ -28,6 +29,10 @@ export class PlaylistPage {
 
     goToPlaylistDetails(song){
 		this.navCtrl.push(PlaylistdetailsPage, { song: song });
+	}
+
+	goToSearchMusicPage(){
+		this.navCtrl.push(SearchmusicPage);
 	}
 
   ionViewDidLoad() {

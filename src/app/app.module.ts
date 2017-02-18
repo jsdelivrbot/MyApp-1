@@ -13,6 +13,8 @@ import { RegistriesPage } from '../pages/registries/registries';
 import { RegistrydetailsPage } from '../pages/registrydetails/registrydetails';
 import { PlaylistPage } from '../pages/playlist/playlist';
 import { PlaylistdetailsPage } from '../pages/playlistdetails/playlistdetails';
+import { SearchmusicPage } from '../pages/searchmusic/searchmusic';
+import { SongrequestPage } from '../pages/songrequest/songrequest';
 import { PhotosPage } from '../pages/photos/photos';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
@@ -64,6 +66,8 @@ const cloudSettings: CloudSettings = {
     RegistrydetailsPage,
     PlaylistPage,
     PlaylistdetailsPage,
+    SearchmusicPage,
+    SongrequestPage,
     PhotosPage,
     ProfilePage,
     LoginPage,
@@ -91,6 +95,8 @@ const cloudSettings: CloudSettings = {
     RegistrydetailsPage,
     PlaylistPage,
     PlaylistdetailsPage,
+    SearchmusicPage,
+    SongrequestPage,
     PhotosPage,
     ProfilePage,
     LoginPage,

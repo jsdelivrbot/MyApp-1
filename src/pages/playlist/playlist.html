@@ -15,6 +15,10 @@
 
 <ion-content>
 
+<ion-fab top right edge >
+    <button ion-fab color="amethyst-reverse" (click)="goToSearchMusicPage()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+
 <ion-list>
     <ion-item color = "amethyst-reverse" detail-push *ngFor="let song of songs | async" (click)="goToPlaylistDetails(song)">
     	<ion-avatar item-left>
