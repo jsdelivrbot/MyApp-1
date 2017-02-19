@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoadingProvider } from '../../providers/loading';
+import { MusicSearch } from '../../providers/music-search';
 
 import { SongrequestPage } from '../songrequest/songrequest';
 
@@ -21,10 +22,10 @@ export class SearchmusicPage {
   	artistChanged: boolean = false;
   	submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, public loadingProvider: LoadingProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, public loadingProvider: LoadingProvider, public alertCtrl: AlertController, public musicSearch: MusicSearch) {
   this.searchForm = formBuilder.group({
-      song: ['', Validators.compose([Validators.required])],
-      artist: ['', Validators.compose([Validators.required])]
+      song: ['', Validators.compose([])],
+      artist: ['', Validators.compose([])]
     });
   }
 
@@ -40,8 +41,11 @@ export class SearchmusicPage {
       console.log(this.searchForm.value);
     }
     else if (this.searchForm.valid){
-      console.log("Search for Music API Needed Here");
-      this.navCtrl.push(SongrequestPage);
+      let searchData = {
+      song: this.searchForm.value.song,
+      artist: this.searchForm.value.artist
+      };
+      this.navCtrl.push(SongrequestPage, searchData);
     }
     else {
     	console.log("ERROR IN MUSIC SEARCH");

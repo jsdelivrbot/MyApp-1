@@ -22,7 +22,7 @@
 <ion-list>
     <ion-item color = "amethyst-reverse" detail-push *ngFor="let song of songs | async" (click)="goToPlaylistDetails(song)">
     	<ion-avatar item-left>
-      		<img src="{{song.songphoto}}">
+      		<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg">
     	</ion-avatar>
       	<h2>{{song.name}}</h2>
       	<p> - {{song.artist}}</p>
