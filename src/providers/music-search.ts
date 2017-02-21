@@ -26,7 +26,7 @@ export class MusicSearch {
 
   		// don't have the data yet
   		return new Promise(resolve => {
-    	this.http.get("http://api.musicgraph.com/api/v2/track/search?api_key=026bcbd4dbd37c7795830166fec48013&artist_name=" + artistName + "&title=" + songName + "&limit=50&fields=artist_name,title,track_youtube_id")
+    	this.http.get("http://api.musicgraph.com/api/v2/track/search?api_key=026bcbd4dbd37c7795830166fec48013&artist_name=" + artistName + "&title=" + songName + "&limit=25&fields=artist_name,title,track_youtube_id")
       		.map(res => res.json().data)
       		.subscribe(data => {
         	this.data1 = data;

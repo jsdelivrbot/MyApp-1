@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="amethyst" align="center">
+  <ion-navbar color="amethyst">
     <ion-title>Music Search</ion-title>
   </ion-navbar>
 
@@ -14,13 +14,15 @@
 
 
 <ion-content class="home">
-  <ion-list>
-    <ion-item *ngFor="let song of songs">
-      <ion-avatar item-left>
-        <img src="https://i1.ytimg.com/vi/{{song.track_youtube_id}}/hqdefault.jpg">
-      </ion-avatar>
-      <h2>{{song.artist_name}}</h2>
-      <p>{{song.title}}</p>
-    </ion-item>
-  </ion-list>
+  
+	<ion-list>
+    	<ion-item *ngFor="let song of songs | musicsearchfilter" (click)="addSongRequest(song.title, song.artist_name, song.track_youtube_id)">
+      		<ion-avatar item-left>
+       			<img src="https://i1.ytimg.com/vi/{{song.track_youtube_id}}/hqdefault.jpg">
+      		</ion-avatar>
+      	<h2>{{song.artist_name}}</h2>
+      	<p>{{song.title}}</p>
+    	</ion-item>
+  	</ion-list>
+
 </ion-content>

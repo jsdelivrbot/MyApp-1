@@ -28,6 +28,8 @@ import { ProfileData } from '../providers/profile-data';
 import { LoadingProvider } from '../providers/loading';
 import { MusicSearch } from '../providers/music-search';
 
+import { Musicsearchfilter } from '../pipes/musicsearchfilter';
+
 
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -70,6 +72,7 @@ const cloudSettings: CloudSettings = {
     PlaylistdetailsPage,
     SearchmusicPage,
     SongrequestPage,
+    Musicsearchfilter,
     PhotosPage,
     ProfilePage,
     LoginPage,
@@ -79,7 +82,7 @@ const cloudSettings: CloudSettings = {
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {mode: "md"}),
     CloudModule.forRoot(cloudSettings),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
   ],

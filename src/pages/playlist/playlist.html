@@ -7,26 +7,38 @@
 <ion-header>
 
   <ion-navbar color="amethyst">
-    <ion-title align="center">Playlist</ion-title>
+    <ion-title>Playlist</ion-title>
+
   </ion-navbar>
+
 
 </ion-header>
 
 
 <ion-content>
 
-<ion-fab top right edge >
-    <button ion-fab color="amethyst-reverse" (click)="goToSearchMusicPage()"><ion-icon name="add"></ion-icon></button>
-</ion-fab>
+	<ion-fab top right edge>
+    	<button ion-fab color="amethyst-reverse" (click)="goToSearchMusicPage()"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
 
 <ion-list>
-    <ion-item color = "amethyst-reverse" detail-push *ngFor="let song of songs | async" (click)="goToPlaylistDetails(song)">
-    	<ion-avatar item-left>
-      		<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg">
-    	</ion-avatar>
+	
+    <ion-item-sliding color = "amethyst-reverse" detail-push *ngFor="let song of songs | async" (click)="goToPlaylistDetails(song)">
+    	<ion-item>
+    		<ion-avatar item-left>
+      			<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg">
+    		</ion-avatar>
       	<h2>{{song.name}}</h2>
       	<p> - {{song.artist}}</p>
-    </ion-item>
+      	</ion-item>
+
+    		<ion-item-options slide="left">
+      			<button ion-button color="danger" (click)="deleteSongRequest(song.$key)"><ion-icon name="trash"></ion-icon> Delete</button>
+    		</ion-item-options>
+
+    </ion-item-sliding>
+
+    
 </ion-list>
 
 

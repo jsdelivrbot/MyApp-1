@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {PlaylistdetailsPage} from '../playlistdetails/playlistdetails';
 import {SearchmusicPage} from '../searchmusic/searchmusic';
-
+import firebase from 'firebase';
 
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
@@ -33,6 +33,10 @@ export class PlaylistPage {
 
 	goToSearchMusicPage(){
 		this.navCtrl.push(SearchmusicPage);
+	}
+
+	deleteSongRequest(songId: string){
+  		this.songs.remove(songId);
 	}
 
   ionViewDidLoad() {
