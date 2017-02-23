@@ -28,7 +28,7 @@ export class InfoPage {
     if (!user) {
       navCtrl.setRoot(LoginPage);
     }
-      });
+      }); 
 
   }
 
@@ -43,6 +43,7 @@ export class InfoPage {
   goToWeddingRegistries(){
   this.navCtrl.push(RegistriesPage);
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InfoPage');

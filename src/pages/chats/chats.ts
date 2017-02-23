@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import firebase from 'firebase';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import { LoadingProvider } from '../../providers/loading';
 
 /*
   Generated class for the Chats page.
@@ -12,8 +15,11 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chats.html'
 })
 export class ChatsPage {
+	groups: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
+  this.groups = af.database.list('/Groups');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatsPage');
