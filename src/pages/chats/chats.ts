@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { LoadingProvider } from '../../providers/loading';
+import { GroupAddPage } from '../group-add/group-add';
 
 /*
   Generated class for the Chats page.
@@ -16,13 +17,22 @@ import { LoadingProvider } from '../../providers/loading';
 })
 export class ChatsPage {
 	groups: FirebaseListObservable<any>;
+	private people: FirebaseListObservable<any>;
+	userProfile: any;
+	chatType: string = "groups";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
   this.groups = af.database.list('/Groups');
+  this.people = af.database.list('/userProfile/');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatsPage');
+  }
+
+  goToGroupAddPage(){
+  this.navCtrl.push(GroupAddPage);
+
   }
 
 }

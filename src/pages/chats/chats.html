@@ -13,7 +13,13 @@
 </ion-header>
 
 
+
 <ion-content>
+
+	<ion-fab top right edge [ngSwitch]="chatType" >
+    	<button ion-fab color="amethyst-reverse" *ngSwitchCase="'groups'" (click)="goToGroupAddPage()"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
+
 	<ion-toolbar color="amethyst-reverse">
 	<div>
   		<ion-segment [(ngModel)]="chatType">
@@ -38,35 +44,32 @@
   			(ionCancel)="onCancel($event)">
 			</ion-searchbar>
 
-    		<ion-list *ngFor="let group of groups | async" (click)="goToGroupChat(group)">
-  				<ion-item color = "amethyst-reverse" detail-push>
+    		
+  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let group of groups | async" (click)="goToGroupChat(group)">
     				<ion-avatar item-left>
       					<img src={{group.groupphoto}}>
     				</ion-avatar>
     					<h2>{{group.groupname}}</h2>
   				</ion-item>
-			</ion-list>
+			
 
   		</ion-list>
 
   		<ion-list *ngSwitchCase="'people'">
 
-  			<ion-searchbar
+  			<ion-searchbar>
   			[(ngModel)]="peopleSearch"
   			[showCancelButton]="shouldShowCancel"
   			(ionInput)="searchPeople($event)"
   			(ionCancel)="onCancel($event)">
 			</ion-searchbar>
 
-    		<ion-list *ngFor="let person of people | async" (click)="goToPersonChat(person)">
-  				<ion-item>
+  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let person of people | async" (click)="goToPersonChat(person)">
     				<ion-avatar item-left>
-      					<img src={{person.profilephoto}}>
+      					<img src={{person.photoURL}}>
     				</ion-avatar>
-    					<h2>{{person.name}}</h2>
+    					<h2>{{person.firstname}} {{person.lastname}}</h2>
   				</ion-item>
-			</ion-list>
-
 
   		</ion-list>
 	</div>

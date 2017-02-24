@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { InfoPage } from '../pages/info/info';
 import { RecentsPage } from '../pages/recents/recents';
 import { ChatsPage } from '../pages/chats/chats';
+import { GroupAddPage } from '../pages/group-add/group-add';
 import { EventsPage } from '../pages/events/events';
 import { EventdetailsPage } from '../pages/eventdetails/eventdetails';
 import { AccommodationsPage } from '../pages/accommodations/accommodations';
@@ -62,6 +63,7 @@ const cloudSettings: CloudSettings = {
     InfoPage,
     RecentsPage,
     ChatsPage,
+    GroupAddPage,
     EventsPage,
     EventdetailsPage,
     AccommodationsPage,
@@ -92,6 +94,7 @@ const cloudSettings: CloudSettings = {
     InfoPage,
     RecentsPage,
     ChatsPage,
+    GroupAddPage,
     EventsPage,
     EventdetailsPage,
     AccommodationsPage,
