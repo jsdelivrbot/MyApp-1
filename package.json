@@ -22,7 +22,7 @@
     "@ionic/app-scripts": "^1.0.0",
     "@ionic/cloud-angular": "^0.9.1",
     "@ionic/storage": "1.1.7",
-    "angularfire2": "^2.0.0-beta.7",
+    "angularfire2": "^2.0.0-beta.7.1-pre",
     "firebase": "^3.6.7",
     "ionic-angular": "2.0.0",
     "ionic-native": "2.4.1",

@@ -26,6 +26,18 @@
   		</ion-card>
   	</div>
 
+  	<ion-card>
+      <ion-item>
+        <ion-icon color="amethyst" name="groupName" item-left large></ion-icon>
+        <h2 align="center" class="groupName" *ngIf="!groupName">Group Name</h2>
+        <h2 align="center" class="groupName" *ngIf="groupName">{{groupName?.groupName}}</h2>
+        <button ion-button icon-left clear item-right (click)="updateGroupName()">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item>
+    </ion-card>
+
   		<ion-list>
 
   			<ion-searchbar

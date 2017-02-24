@@ -17,13 +17,13 @@ import { GroupAddPage } from '../group-add/group-add';
 })
 export class ChatsPage {
 	groups: FirebaseListObservable<any>;
-	private people: FirebaseListObservable<any>;
+	people: FirebaseListObservable<any>;
 	userProfile: any;
 	chatType: string = "groups";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
   this.groups = af.database.list('/Groups');
-  this.people = af.database.list('/userProfile/');
+  this.people = af.database.list('/Weddings/0/weddingPeople');
   }
 
   ionViewDidLoad() {
