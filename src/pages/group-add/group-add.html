@@ -16,7 +16,7 @@
 <ion-content>
 
 	<ion-fab top right edge>
-    	<button ion-fab color="amethyst-reverse" (click)="saveGroupProfile()"><ion-icon name="checkmark"></ion-icon></button>
+    	<button ion-fab color="amethyst-reverse" (click) = "saveNewGroup()"><ion-icon name="checkmark"></ion-icon></button>
 	</ion-fab>
 
   	<div align="center">
@@ -37,15 +37,16 @@
         </button>
       </ion-item>
     </ion-card>
+   
 
   		<ion-list>
 
-  			<ion-searchbar
+  			<!--<ion-searchbar
   			[(ngModel)]="groupSearch"
   			[showCancelButton]="shouldShowCancel"
   			(ionInput)="searchGroup($event)"
   			(ionCancel)="onCancel($event)">
-			</ion-searchbar>
+			</ion-searchbar>-->
 
     		
   				<ion-item color = "amethyst-reverse" *ngFor="let person of people | async">
@@ -53,10 +54,11 @@
       					<img src={{person.photoURL}}>
     				</ion-avatar>
     					<ion-label>{{person.firstname}} {{person.lastname}}</ion-label>
-    					<ion-checkbox color="amethyst" item-right></ion-checkbox>
+    					<ion-checkbox checked="false" [(ngModel)]="person.checked" color="amethyst" item-right (click) = "checkedPeople(person, person.checked)"></ion-checkbox>
   				</ion-item>
 			
 
   		</ion-list>
+
 
 </ion-content>

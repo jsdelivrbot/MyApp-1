@@ -47,9 +47,9 @@
     		
   				<ion-item color = "amethyst-reverse" detail-push *ngFor="let group of groups | async" (click)="goToGroupChat(group)">
     				<ion-avatar item-left>
-      					<img src={{group.groupphoto}}>
+      					<img src={{group.groupPhotoURL}}>
     				</ion-avatar>
-    					<h2>{{group.groupname}}</h2>
+    					<h2>{{group.groupName}}</h2>
   				</ion-item>
 			
 

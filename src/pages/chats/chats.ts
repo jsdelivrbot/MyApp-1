@@ -22,7 +22,7 @@ export class ChatsPage {
 	chatType: string = "groups";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-  this.groups = af.database.list('/Groups');
+  this.groups = af.database.list('/Weddings/0/weddingGroups');
   this.people = af.database.list('/Weddings/0/weddingPeople');
   }
 

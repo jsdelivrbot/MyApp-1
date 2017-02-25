@@ -3,7 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Platform, ActionSheetController } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 /*
   Generated class for the GroupAdd page.
 
@@ -20,14 +20,17 @@ export class GroupAddPage {
 	public groupNameObject: string;
 	public groupNameObjectString: string;
 	public groupNameString: string;
-	groupForm: FormGroup;
-	public groupProfileData: any;
+	public peopleForGroup = [{}];
+	public weddingGroup: any;
+	public weddingGroupMembers: any;
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder) {
 	this.people = af.database.list('/Weddings/0/weddingPeople');
-	this.groupForm = formBuilder.group({
-      'groupName': ''
-    })
+	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups');
+	this.weddingGroupMembers = firebase.database().ref('/Weddings/0/weddingGroups/0/groupMembers');
+
   }
 
   ionViewDidLoad() {
@@ -64,9 +67,42 @@ export class GroupAddPage {
   alert.present();
  }
 
-  onSubmit(formData) {
-    console.log('Form data is ', formData);
-    //this.groupProfileData = formData;
+ checkedPeople(person, checked){
+ 	console.log(checked);
+ 	if(checked == true){
+ 	this.addPerson(person);
+ 	}
+ 	if(checked == false){
+ 	this.removePerson(person);
+ 	//console.log("removePerson")
+ 	}
+
+ }
+
+ addPerson(person){
+        this.peopleForGroup.push(person);
+        //console.log(this.peopleForGroup);
+    }
+
+ removePerson(person){
+        for(var i = 0; i < this.peopleForGroup.length; i++) {
+        	//console.log (JSON.stringify(this.peopleForGroup[i]) + " = " + JSON.stringify(person));
+            if(this.peopleForGroup[i] == person){
+                this.peopleForGroup.splice(i, 1);
+            }
+        }
+        console.log(this.peopleForGroup);
+    }   
+
+  saveNewGroup() {
+    console.log('New Group Info: ' + this.groupNameString);
+    this.weddingGroup.push({
+    	groupName: this.groupNameString,
+    	groupPhotoURL: 'url',
+    });
+    
+    this.weddingGroupMembers.set(this.peopleForGroup);
+   	
   }
 
 
