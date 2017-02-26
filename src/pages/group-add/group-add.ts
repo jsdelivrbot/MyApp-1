@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ChatsPage } from '../chats/chats';
 /*
   Generated class for the GroupAdd page.
 
@@ -23,13 +24,14 @@ export class GroupAddPage {
 	public peopleForGroup = [{}];
 	public weddingGroup: any;
 	public weddingGroupMembers: any;
+	public newWeddingGroupKey: any;
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder) {
 	this.people = af.database.list('/Weddings/0/weddingPeople');
-	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups');
-	this.weddingGroupMembers = firebase.database().ref('/Weddings/0/weddingGroups/0/groupMembers');
+	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups/');
+	//this.weddingGroupMembers = firebase.database().ref('/Weddings/0/weddingGroups/0/groupMembers');
 
   }
 
@@ -95,16 +97,23 @@ export class GroupAddPage {
     }   
 
   saveNewGroup() {
-    console.log('New Group Info: ' + this.groupNameString);
-    this.weddingGroup.push({
-    	groupName: this.groupNameString,
-    	groupPhotoURL: 'url',
-    });
-    
-    this.weddingGroupMembers.set(this.peopleForGroup);
-   	
-  }
+    //console.log('New Group Info: ' + this.groupNameString);
+    var newGroup = {
+    groupName: this.groupNameString,
+    groupPhotoURL: 'url'
+  };
 
+    this.newWeddingGroupKey = this.weddingGroup.push().key;
+    var updates = {};
+  	updates[this.newWeddingGroupKey] = newGroup;
+  	var updates2 = {};
+  	updates2[this.newWeddingGroupKey + '/groupMembers/'] = this.peopleForGroup;
+
+  	this.weddingGroup.update(updates);
+  	this.weddingGroup.update(updates2);
+  	this.navCtrl.push(ChatsPage);
+    this.navCtrl.setRoot(ChatsPage);
+  }
 
 
   profilePicActionSheet() {
