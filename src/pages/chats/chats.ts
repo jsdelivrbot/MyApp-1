@@ -5,6 +5,7 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { LoadingProvider } from '../../providers/loading';
 import { GroupAddPage } from '../group-add/group-add';
 import { FormControl } from '@angular/forms';
+import { GroupchatPage } from '../groupchat/groupchat';
 
 
 
@@ -70,7 +71,10 @@ export class ChatsPage {
 
   goToGroupAddPage(){
   this.navCtrl.push(GroupAddPage);
+  }
 
+  goToGroupChat(){
+  this.navCtrl.push(GroupchatPage);
   }
 
   searchGroups(searchGroupBar) {

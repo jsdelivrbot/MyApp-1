@@ -6,6 +6,7 @@ import { InfoPage } from '../pages/info/info';
 import { RecentsPage } from '../pages/recents/recents';
 import { ChatsPage } from '../pages/chats/chats';
 import { GroupAddPage } from '../pages/group-add/group-add';
+import { GroupchatPage } from '../pages/groupchat/groupchat';
 import { EventsPage } from '../pages/events/events';
 import { EventdetailsPage } from '../pages/eventdetails/eventdetails';
 import { AccommodationsPage } from '../pages/accommodations/accommodations';
@@ -64,6 +65,7 @@ const cloudSettings: CloudSettings = {
     RecentsPage,
     ChatsPage,
     GroupAddPage,
+    GroupchatPage,
     EventsPage,
     EventdetailsPage,
     AccommodationsPage,
@@ -95,6 +97,7 @@ const cloudSettings: CloudSettings = {
     RecentsPage,
     ChatsPage,
     GroupAddPage,
+    GroupchatPage,
     EventsPage,
     EventdetailsPage,
     AccommodationsPage,
