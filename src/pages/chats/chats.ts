@@ -28,6 +28,7 @@ export class ChatsPage {
 	peopleList: any;
 	filteredPeopleList: any;
 	chatType: string = "groups";
+
 	
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
@@ -73,8 +74,8 @@ export class ChatsPage {
   this.navCtrl.push(GroupAddPage);
   }
 
-  goToGroupChat(){
-  this.navCtrl.push(GroupchatPage);
+  goToGroupChat(group){
+  this.navCtrl.push(GroupchatPage, { group: group });
   }
 
   searchGroups(searchGroupBar) {

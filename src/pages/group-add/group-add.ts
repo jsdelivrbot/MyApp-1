@@ -31,7 +31,6 @@ export class GroupAddPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder) {
 	this.people = af.database.list('/Weddings/0/weddingPeople');
 	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups/');
-	//this.weddingGroupMembers = firebase.database().ref('/Weddings/0/weddingGroups/0/groupMembers');
 
   }
 
@@ -104,6 +103,7 @@ export class GroupAddPage {
   };
 
     this.newWeddingGroupKey = this.weddingGroup.push().key;
+  	var groupId = this.newWeddingGroupKey;
     var updates = {};
   	updates[this.newWeddingGroupKey] = newGroup;
   	var updates2 = {};
@@ -111,6 +111,7 @@ export class GroupAddPage {
 
   	this.weddingGroup.update(updates);
   	this.weddingGroup.update(updates2);
+  	this.weddingGroup.child(groupId).update({groupId: groupId});
   	this.navCtrl.push(ChatsPage);
     this.navCtrl.setRoot(ChatsPage);
   }

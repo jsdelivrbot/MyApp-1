@@ -7,15 +7,33 @@
 <ion-header>
 
   <ion-navbar color = amethyst>
-    <ion-title>Group Chat</ion-title>
+    <ion-title>{{group.groupName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content has-footer>
+
+	<!-- Messages -->
+  <div class="messages">
+    <ion-list no-lines>
+    	<ion-item text-wrap color = amethyst-reverse *ngFor="let message of groupChat | async">
+    		<ion-avatar item-right>
+      			<img src={{message.photoURL}} *ngIf="isSender(message)">
+    		</ion-avatar>
+    		<ion-avatar item-left>
+      			<img src={{message.photoURL}} *ngIf="!isSender(message)">
+    		</ion-avatar>
+     	 <p class="sender" *ngIf="isSender(message)">{{message.message}}</p>
+     	 <P class="not-sender" *ngIf="!isSender(message)">{{message.message}}</P>
+    	</ion-item>
+	</ion-list>
+  </div>
+
 
 </ion-content>
+
 <!-- Message Box -->
 <ion-footer>
 	
@@ -27,7 +45,7 @@
   	<ion-toolbar color="amethyst-reverse">
     	
     	<ion-item>
-    		<ion-input type="text" placeholder="Type a message..." ></ion-input>   
+    		<ion-input [(ngModel)]="message" type="text" placeholder="Type a message..." ></ion-input>   
     	</ion-item> 
     	
     </ion-toolbar>

@@ -47,7 +47,7 @@
 			</ion-searchbar>-->
 
     		
-  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let group of groupList" (click)="goToGroupChat()">
+  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let group of groupList" (click)="goToGroupChat(group)">
     				<ion-avatar item-left>
       					<img src={{group.groupPhotoURL}}>
     				</ion-avatar>
