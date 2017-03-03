@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import firebase from 'firebase';
 
@@ -14,15 +14,30 @@ import firebase from 'firebase';
   templateUrl: 'groupchat.html'
 })
 export class GroupchatPage {
+	@ViewChild(Content) content: Content;
 	group;
 	groupChat: FirebaseListObservable<any>;
 	private message: any;
+	private newMessage: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
   	this.group = navParams.data.group;
-  	this.groupChat = af.database.list('/Weddings/0/weddingGroups/' + this.group.groupId + '/groupChat');
-  	console.log(JSON.stringify(this.group.groupId));
+  	this.groupChat = af.database.list('/Weddings/0/weddingGroups/' + this.group.groupId + '/groupChat', {
+  		query: {
+  			limitToLast: 10
+  		}
+  	});
+  	this.scrollBottom();
   }
+
+  // Scroll to bottom of page after a short delay.
+  scrollBottom() {
+    var that = this;
+    setTimeout(function() {
+      that.content.scrollToBottom();
+    }, 300);
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupchatPage');
@@ -36,6 +51,20 @@ export class GroupchatPage {
       return false;
     }
   }
+
+  send(newMessage) {
+  	let newMessages = JSON.parse(JSON.stringify(this.newMessage));
+    	this.groupChat.push({
+          //date: new Date().toString(),
+          sender: firebase.auth().currentUser.uid,
+          type: 'text',
+          photoURL: 'url',
+          message: this.newMessage
+        });
+        // Clear messagebox.
+        this.newMessage = '';
+        this.scrollBottom();
+    }
 
   
 

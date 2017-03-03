@@ -14,11 +14,8 @@ page-groupchat {
     word-wrap: break-word;
     white-space: pre-wrap;
     display: inline-block;
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
-   
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;  
 }
-
-
 
 
 .not-sender{
@@ -36,9 +33,12 @@ page-groupchat {
     white-space: pre-wrap;
     display: inline-block;
 	box-shadow: -2px 3px 5px -2px rgba(0,0,0,0.3);
-    
-  	
+}
 
+
+ion-spinner {
+  display: block;
+  margin: auto;
 }
 
 
