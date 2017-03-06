@@ -18,6 +18,7 @@ import { PlaylistdetailsPage } from '../pages/playlistdetails/playlistdetails';
 import { SearchmusicPage } from '../pages/searchmusic/searchmusic';
 import { SongrequestPage } from '../pages/songrequest/songrequest';
 import { PhotosPage } from '../pages/photos/photos';
+import { AlbumdetailsPage } from '../pages/albumdetails/albumdetails';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -78,6 +79,7 @@ const cloudSettings: CloudSettings = {
     SongrequestPage,
     Musicsearchfilter,
     PhotosPage,
+    AlbumdetailsPage,
     ProfilePage,
     LoginPage,
     RegisterPage,
@@ -109,6 +111,7 @@ const cloudSettings: CloudSettings = {
     SearchmusicPage,
     SongrequestPage,
     PhotosPage,
+    AlbumdetailsPage,
     ProfilePage,
     LoginPage,
     RegisterPage,
