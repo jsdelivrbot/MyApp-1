@@ -10,27 +10,44 @@
     <ion-title>{{album.albumName}}</ion-title>
   </ion-navbar>
 
-  	<ion-fab bottom edge right>
-     	 <button ion-fab tappable color="amethyst-reverse" (click) = loadMorePhotos(10)><ion-icon name="refresh"></ion-icon></button>
-    </ion-fab>
-
 </ion-header>
 
 
 <ion-content padding class="photoGallery" has-footer>
 
-	<ion-grid align="center">
+	
   		<ion-row wrap>
-    		<ion-col width-50 *ngFor="let photo of photos | async">
-    			<ion-img src="{{photo.photoURL}}" class="photoGallery">
-    			</ion-img>
+    		<ion-col width-33 *ngFor="let photo of photoList.slice().reverse()">
+    			<img src="{{photo.photoURL}}">
     		</ion-col>
   		</ion-row>
-	</ion-grid>
 
 
+  <!--<ion-grid>
+  <ion-row wrap>
+  <ion-col width-25 *ngFor="let row of photoList">
+  <ion-list no-lines class="photoGallery">
+    <ion-item color="black" *ngFor="let photo of photoList">
+        <img src="{{photo.photoURL}}">
+    </ion-item> 
+  </ion-list>
+  </ion-col>
+  </ion-row>
+  </ion-grid>-->
+
+  <!--<ion-row wrap>
+  <ion-col width-33 *ngFor="let photo of photoList">
+  <img src="{{photo.photoURL}}">
+  </ion-col>
+  </ion-row>-->
+
+  <div *ngIf="needMorePhotos == true">
+    <button ion-button block color="amethyst" (click) = loadMorePhotos(10)>Load More Photos...</button>
+  </div>
+  
 
 </ion-content>
+
 <ion-footer>
 	
   <div>
