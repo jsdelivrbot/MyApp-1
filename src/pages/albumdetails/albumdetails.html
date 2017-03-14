@@ -15,31 +15,12 @@
 
 <ion-content padding class="photoGallery" has-footer>
 
-	
-  		<ion-row wrap>
-    		<ion-col width-33 *ngFor="let photo of photoList.slice().reverse()">
-    			<img src="{{photo.photoURL}}">
-    		</ion-col>
-  		</ion-row>
-
-
-  <!--<ion-grid>
   <ion-row wrap>
-  <ion-col width-25 *ngFor="let row of photoList">
-  <ion-list no-lines class="photoGallery">
-    <ion-item color="black" *ngFor="let photo of photoList">
-        <img src="{{photo.photoURL}}">
-    </ion-item> 
-  </ion-list>
-  </ion-col>
+    <ion-col width-33 *ngFor="let photo of photoList.slice().reverse()">
+      <img src="{{photo.photoURL}}">
+    </ion-col>
   </ion-row>
-  </ion-grid>-->
 
-  <!--<ion-row wrap>
-  <ion-col width-33 *ngFor="let photo of photoList">
-  <img src="{{photo.photoURL}}">
-  </ion-col>
-  </ion-row>-->
 
   <div *ngIf="needMorePhotos == true">
     <button ion-button block color="amethyst" (click) = loadMorePhotos(10)>Load More Photos...</button>
@@ -55,8 +36,8 @@
   		<ion-grid align="center">
  			 <ion-row>
    				 <ion-col width-33><button color="amethyst" ion-button outline icon-only tappable><ion-icon name="camera"></ion-icon></button></ion-col>
-   				 <ion-col width-33><button color="amethyst" ion-button outline icon-only tappable><ion-icon name="images"></ion-icon></button></ion-col>
    				 <ion-col width-33><button color="amethyst" ion-button outline icon-only tappable><ion-icon name="photos"></ion-icon></button></ion-col>
+   				 <ion-col width-33><button color="amethyst" ion-button outline icon-only tappable (click)="openGallery()"><ion-icon name="images"></ion-icon></button></ion-col>
   			</ion-row>
 		</ion-grid>
   	</ion-toolbar>
