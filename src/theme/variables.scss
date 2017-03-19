@@ -55,6 +55,14 @@ ion-title {
   text-align: center;
 }  
 
+ion-spinner * {
+  width: 28px;
+  height: 28px;
+  stroke: amethyst-reverse;
+  fill: amethyst;
+}
+$spinner-md-crescent-color: #9b59b6;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

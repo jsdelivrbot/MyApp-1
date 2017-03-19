@@ -3,6 +3,7 @@ import { NavController, NavParams, Content } from 'ionic-angular';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import firebase from 'firebase';
 import { ImagePicker } from 'ionic-native';
+import { LoadingProvider } from '../../providers/loading';
 
 declare var window: any;
 
@@ -28,9 +29,11 @@ export class AlbumdetailsPage {
   public photoRef: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider) {
+    this.loadingProvider.show();
   	this.album = navParams.data.album;
     this.initializePhotos(this.newLimit);
+    this.loadingProvider.hide();
   }
 
   ionViewDidLoad() {
@@ -71,32 +74,34 @@ export class AlbumdetailsPage {
 
     ImagePicker.getPictures(options).then((file_uris) => {
       // convert picture to blob
-      return this.makeFileIntoBlob(file_uris);
-    }).then((imageBlob) => {
-      // upload the blob
-      return this.uploadToFirebase(imageBlob);
-    }).then((uploadSnapshot: any) => {
-      // store reference to storage in database
-      return this.saveToPhotoAlbum(uploadSnapshot);
-    }).then((uploadSnapshot: any) => {
+      this.loadingProvider.show();
+      for (let i = 0; i < file_uris.length; i++) {
+        this.makeFileIntoBlob(file_uris[i]).then((imageBlob) => {
+          this.uploadToFirebase(imageBlob).then((uploadSnapshot: any) => {
+            this.saveToPhotoAlbum(uploadSnapshot);
+          });
+        });
+      }
+      this.loadingProvider.hide();
     }, (_error) => {
+    this.loadingProvider.hide();
     alert('Error ' + (_error.message || _error));
     });
-
   }
 
   makeFileIntoBlob(file_uris) {
 
   return new Promise((resolve, reject) => {
-    window.resolveLocalFileSystemURL(file_uris[0], (fileEntry) => {
+    window.resolveLocalFileSystemURL(file_uris, (fileEntry) => {
 
       fileEntry.file((resFile) => {
 
         var reader = new FileReader();
         reader.onloadend = (evt: any) => {
           var imgBlob: any = new Blob([evt.target.result], { type: 'image/jpeg' });
-          imgBlob.name = 'sample.jpg';
+          imgBlob.name = resFile.name;
           resolve(imgBlob);
+          return(imgBlob);
         };
 
         reader.onerror = (e) => {
@@ -111,7 +116,7 @@ export class AlbumdetailsPage {
 }
 
 uploadToFirebase(imageBlob) {
-  var fileName = 'TEST' + '.jpg';
+  var fileName = Date.now() + '_' + imageBlob.name;
 
   return new Promise((resolve, reject) => {
     var fileRef = firebase.storage().ref('/Weddings/0/weddingAlbums/' + this.album.$key + '/' + fileName);
@@ -125,6 +130,7 @@ uploadToFirebase(imageBlob) {
     }, () => {
       // completion...
       resolve(uploadTask.snapshot);
+      return(uploadTask.snapshot);
     });
   });
 }
