@@ -20,6 +20,7 @@ export class GroupchatPage {
 	private message: any;
 	private newMessage: any;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
   	this.group = navParams.data.group;
   	this.groupChat = af.database.list('/Weddings/0/weddingGroups/' + this.group.groupId + '/groupChat', {
@@ -58,7 +59,7 @@ export class GroupchatPage {
           //date: new Date().toString(),
           sender: firebase.auth().currentUser.uid,
           type: 'text',
-          photoURL: 'url',
+          photoURL: 'assets/images/profile_avatar.png',
           message: this.newMessage
         });
         // Clear messagebox.

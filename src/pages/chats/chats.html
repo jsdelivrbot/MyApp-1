@@ -61,7 +61,7 @@
 
   			<ion-searchbar (ionInput)="searchPeople($event)"></ion-searchbar>
 
-  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let person of peopleList" (click)="goToPersonChat(person)">
+  				<ion-item color = "amethyst-reverse" detail-push *ngFor="let person of peopleList">
     				<ion-avatar item-left>
       					<img src={{person.photoURL}}>
     				</ion-avatar>

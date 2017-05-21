@@ -5,6 +5,8 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ChatsPage } from '../chats/chats';
+
+import { Camera } from 'ionic-native';
 /*
   Generated class for the GroupAdd page.
 
@@ -25,12 +27,14 @@ export class GroupAddPage {
 	public weddingGroup: any;
 	public weddingGroupMembers: any;
 	public newWeddingGroupKey: any;
+  private imageSrc: string;
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder) {
 	this.people = af.database.list('/Weddings/0/weddingPeople');
 	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups/');
+  this.imageSrc = "../assets/images/profile_avatar.png"
 
   }
 
@@ -99,7 +103,7 @@ export class GroupAddPage {
     //console.log('New Group Info: ' + this.groupNameString);
     var newGroup = {
     groupName: this.groupNameString,
-    groupPhotoURL: 'url'
+    groupPhotoURL: 'assets/images/profile_avatar.png'
   };
 
     this.newWeddingGroupKey = this.weddingGroup.push().key;
@@ -116,6 +120,22 @@ export class GroupAddPage {
     this.navCtrl.setRoot(ChatsPage);
   }
 
+  getPicture() {
+
+  // get picture from camera
+
+  //this.loadingProvider.show();
+  Camera.getPicture({
+    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: Camera.DestinationType.FILE_URI,
+    quality: 100,
+    targetWidth: 150,
+    targetHeight: 150,
+    encodingType: Camera.EncodingType.JPEG,
+    correctOrientation: true
+  }).then(file_uri => this.imageSrc = file_uri, 
+    err => console.log(err));   
+  }
 
   profilePicActionSheet() {
     let profilePicSheet = this.actionSheetCtrl.create({
@@ -134,7 +154,7 @@ export class GroupAddPage {
           icon: !this.platform.is('ios') ? 'images' : null,
           handler: () => {
             console.log('Select from Gallery clicked');
-            //this.getPicture();
+            this.getPicture();
           }
         },{
           text: 'Cancel',

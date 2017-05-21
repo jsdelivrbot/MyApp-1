@@ -14,11 +14,15 @@ import firebase from 'firebase';
 export class AuthService {
   public fireAuth: any;
   public userProfile: any;
+  public weddingPeople: any;
+  public fullname: any;
+  public photoURL: any;
 
   constructor(public http: Http) {
     console.log('Hello AuthService Provider');
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('/userProfile');
+    this.weddingPeople = firebase.database().ref('/Weddings/0/weddingPeople/');
   }
 
   doLogin(email: string, password: string): any {
@@ -29,6 +33,9 @@ export class AuthService {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((newUser) => {
         this.userProfile.child(newUser.uid).set({email: email, firstname: firstname, lastname: lastname});
+        this.fullname = firstname + ' ' + lastname;
+        this.photoURL = '/assets/images/profile_avatar.png'
+        this.weddingPeople.push({email: email, firstname: firstname, lastname: lastname, fullname: this.fullname, photoURL: this.photoURL});
     });
   }
 
