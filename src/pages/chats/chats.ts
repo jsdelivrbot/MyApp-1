@@ -67,7 +67,10 @@ export class ChatsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatsPage');
+    // loads list of groups when page loads
+    setTimeout(() => {
+      this.initializeGroups();
+    }, 500);
   }
 
   goToGroupAddPage(){

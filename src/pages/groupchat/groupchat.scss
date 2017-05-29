@@ -35,6 +35,18 @@ page-groupchat {
 	box-shadow: -2px 3px 5px -2px rgba(0,0,0,0.3);
 }
 
+.scroll-content{
+    padding-bottom:0!important;
+}
+
+.input-cover {
+position: static;
+}
+
+.header {
+position: absolute;
+}
+
 
 ion-spinner {
   display: block;
