@@ -21,6 +21,7 @@ import { PhotosPage } from '../pages/photos/photos';
 import { AlbumdetailsPage } from '../pages/albumdetails/albumdetails';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
+import { WeddingChoicePage } from '../pages/wedding-choice/wedding-choice';
 import { RegisterPage } from '../pages/register/register';
 import { ResetpwdPage } from '../pages/resetpwd/resetpwd';
 import { IntroPage } from '../pages/intro/intro';
@@ -82,6 +83,7 @@ const cloudSettings: CloudSettings = {
     AlbumdetailsPage,
     ProfilePage,
     LoginPage,
+    WeddingChoicePage,
     RegisterPage,
     ResetpwdPage,
     IntroPage,
@@ -114,6 +116,7 @@ const cloudSettings: CloudSettings = {
     AlbumdetailsPage,
     ProfilePage,
     LoginPage,
+    WeddingChoicePage,
     RegisterPage,
     ResetpwdPage,
     IntroPage,

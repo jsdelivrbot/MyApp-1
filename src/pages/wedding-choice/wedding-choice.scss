@@ -1,0 +1,35 @@
+page-wedding-choice {
+
+.create_area {
+  width: 100%;
+  height: 49.9%;
+  opacity: 1.0;
+}
+.join_area {
+  width: 100%;
+  height: 49.9%;
+}
+
+ .card-title {
+   position: absolute;
+   top: 35%;
+   left: 5%;
+   font-size: 2.0em;
+   width: 100%;
+   font-weight: bold;
+   color: #fff;
+ }
+
+ .create_button{
+   position: absolute;
+   top: 5%;
+   right: 5%;	
+ }
+
+  .join_button{
+   position: absolute;
+   top: 55%;
+   right: 5%;
+ }
+
+}
