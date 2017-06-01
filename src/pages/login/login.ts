@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 import { RegisterPage } from '../register/register';
 import { ResetpwdPage } from '../resetpwd/resetpwd';
-import { WeddingChoicePage } from '../wedding-choice/wedding-choice'
+import { WeddingChoicePage } from '../wedding-choice/wedding-choice';
 import { TabsPage } from '../tabs/tabs';
 
 

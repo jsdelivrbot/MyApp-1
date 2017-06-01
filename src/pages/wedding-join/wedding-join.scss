@@ -1,0 +1,25 @@
+page-wedding-join {
+
+  form {
+    margin-bottom: 20px;
+    button {
+      margin-top: 20px !important;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    p {
+      font-style: italic;
+      color: red;
+    }
+  }
+
+  .invalid {
+    border-bottom: 1px solid #FF6153;
+  }
+
+  .error-message .item-inner {
+    border-bottom: 0 !important;
+  }
+
+
+}

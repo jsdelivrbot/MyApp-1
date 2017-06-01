@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="amethyst">
+    <ion-title>
+      Join a Wedding
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="weddingJoinForm" (submit)="joinWedding()" novalidate>
+    
+    <ion-item>
+      
+      <ion-label stacked>Wedding Key</ion-label>
+
+        <ion-input #weddingKey formControlName="weddingKey" type="text" placeholder="Enter a Wedding Key" [class.invalid]="!weddingJoinForm.controls.weddingKey.valid"></ion-input>
+
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="!weddingJoinForm.controls.weddingKey.valid && submitAttempt">
+      <p>Please enter a valid wedding key.</p>
+    </ion-item>
+
+  <button color="amethyst" ion-button block type="submit">
+      Submit
+  </button>
+
+  </form>
+
+</ion-content>
