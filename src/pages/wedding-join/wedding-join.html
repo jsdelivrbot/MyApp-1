@@ -7,13 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="weddingJoinForm" (submit)="joinWedding()" novalidate>
+  <form [formGroup]="weddingJoinForm" (submit)="joinWedding(weddingKey)" novalidate>
     
     <ion-item>
       
       <ion-label stacked>Wedding Key</ion-label>
 
-        <ion-input #weddingKey formControlName="weddingKey" type="text" placeholder="Enter a Wedding Key" [class.invalid]="!weddingJoinForm.controls.weddingKey.valid"></ion-input>
+        <ion-input [(ngModel)]="weddingKey" formControlName="weddingKey" type="text" placeholder="Enter a Wedding Key" [class.invalid]="!weddingJoinForm.controls.weddingKey.valid"></ion-input>
 
     </ion-item>
 
