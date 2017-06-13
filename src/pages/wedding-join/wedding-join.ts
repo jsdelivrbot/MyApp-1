@@ -18,12 +18,15 @@ export class WeddingJoinPage {
 	weddingKeyString: String;
 	private weddingKeyArray = [];
 	keyMatch: boolean = false;
+	public userProfileRef: any;
+	private firstLogin: String;
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public alertCtrl: AlertController, public af: AngularFire) {
   	this.weddingJoinForm = formBuilder.group({
       weddingKey: ['', Validators.compose([Validators.required])]
     });
 	this.keyMatch = false;
+	this.userProfileRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid);
   }
 
   joinWedding(weddingKey){
@@ -44,9 +47,12 @@ export class WeddingJoinPage {
     			});
     		if(this.weddingKeyArray[0] == this.weddingKey){
     			this.weddingKeyArray = [];
+    			this.firstLogin = "false";
     			this.navCtrl.setRoot(TabsPage);
             	this.navCtrl.push(TabsPage);
-            	//TODO: Push to firebase to update firstLogin variable to false
+            	this.userProfileRef.update({
+            		firstLogin: this.firstLogin
+            	});
     		}
     		else{
     		let alert = this.alertCtrl.create({
