@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 import { WeddingJoinPage } from '../wedding-join/wedding-join';
+import { WeddingCreatePage } from '../wedding-create/wedding-create';
+
 
 @Component({
   selector: 'page-wedding-choice',
@@ -15,6 +17,11 @@ export class WeddingChoicePage {
 
   goToWeddingJoin(){
   	this.navCtrl.push(WeddingJoinPage);
+
+  }
+
+  goToWeddingCreate(){
+  	this.navCtrl.push(WeddingCreatePage);
 
   }
 

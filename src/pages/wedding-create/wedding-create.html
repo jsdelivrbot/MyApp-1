@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="amethyst">
+    <ion-title>
+      Create a Wedding
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="weddingCreateForm" (submit)="createWedding(weddingName)" novalidate>
+    
+    <ion-item>
+      
+      <ion-label stacked>Wedding Name</ion-label>
+
+        <ion-input [(ngModel)]="weddingName" formControlName="weddingName" type="text" placeholder="Enter a Wedding Name" [class.invalid]="!weddingCreateForm.controls.weddingName.valid"></ion-input>
+
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="!weddingCreateForm.controls.weddingName.valid && submitAttempt">
+      <p>Please enter a wedding name.</p>
+    </ion-item>
+
+  <button color="amethyst" ion-button block type="submit">
+      Submit
+  </button>
+
+  </form>
+
+</ion-content>
