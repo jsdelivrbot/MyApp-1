@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
-import { TabsPage } from '../tabs/tabs';
+import { WeddingInvitePage } from '../wedding-invite/wedding-invite';
 
 @Component({
   selector: 'page-wedding-create',
@@ -33,7 +33,7 @@ export class WeddingCreatePage {
     this.weddingName = weddingName;
     this.weddingCreator = firebase.auth().currentUser.uid;
 
-    if(weddingName = ""){
+    if(this.weddingName === ""){
       this.weddingName = null;
     }
   	
@@ -48,8 +48,8 @@ export class WeddingCreatePage {
       updates[this.newWeddingKey] = newWedding;
 
       this.weddingRef.update(updates);
-      this.navCtrl.push(TabsPage);
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.push(WeddingInvitePage);
+      this.navCtrl.setRoot(WeddingInvitePage);
       this.firstLogin = "false";
       this.userProfileRef.update({
         firstLogin: this.firstLogin
