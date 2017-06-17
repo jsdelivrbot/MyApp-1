@@ -25,6 +25,7 @@ import { WeddingChoicePage } from '../pages/wedding-choice/wedding-choice';
 import { WeddingJoinPage } from '../pages/wedding-join/wedding-join';
 import { WeddingCreatePage } from '../pages/wedding-create/wedding-create';
 import { WeddingInvitePage } from '../pages/wedding-invite/wedding-invite';
+import { WeddingInviteGuestsPage } from '../pages/wedding-invite-guests/wedding-invite-guests';
 import { RegisterPage } from '../pages/register/register';
 import { ResetpwdPage } from '../pages/resetpwd/resetpwd';
 import { IntroPage } from '../pages/intro/intro';
@@ -90,6 +91,7 @@ const cloudSettings: CloudSettings = {
     WeddingJoinPage,
     WeddingCreatePage,
     WeddingInvitePage,
+    WeddingInviteGuestsPage,
     RegisterPage,
     ResetpwdPage,
     IntroPage,
@@ -126,6 +128,7 @@ const cloudSettings: CloudSettings = {
     WeddingJoinPage,
     WeddingCreatePage,
     WeddingInvitePage,
+    WeddingInviteGuestsPage,
     RegisterPage,
     ResetpwdPage,
     IntroPage,

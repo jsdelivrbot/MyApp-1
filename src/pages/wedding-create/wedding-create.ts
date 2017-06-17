@@ -13,12 +13,13 @@ import { WeddingInvitePage } from '../wedding-invite/wedding-invite';
 export class WeddingCreatePage {
 	public weddingCreateForm;
 	submitAttempt: boolean = false;
-	private weddingName: String;
+	public weddingName: String;
 	public userProfileRef: any;
   public weddingRef: any;
   public newWeddingKey: any;
   public weddingCreator: any;
 	private firstLogin: String;
+  public weddingData = {};
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public alertCtrl: AlertController, public af: AngularFire) {
   	this.weddingCreateForm = formBuilder.group({
@@ -48,12 +49,16 @@ export class WeddingCreatePage {
       updates[this.newWeddingKey] = newWedding;
 
       this.weddingRef.update(updates);
-      this.navCtrl.push(WeddingInvitePage);
-      this.navCtrl.setRoot(WeddingInvitePage);
+      this.weddingData = {
+        weddingName: this.weddingName,
+        weddingKey: this.newWeddingKey
+      };
       this.firstLogin = "false";
       this.userProfileRef.update({
         firstLogin: this.firstLogin
         });
+      this.navCtrl.setRoot(WeddingInvitePage, {weddingData: this.weddingData});
+      //this.navCtrl.setRoot(WeddingInvitePage);
     }
     else{
       console.log("No Name Entered");

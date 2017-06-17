@@ -10,14 +10,14 @@ ion-card {
     top: 10%;
     font-size: 1.2em;
     width: 100%;
-    font-weight: bold;
+    font-weight: normal;
     color: #fff;
   }
 
    .card-weddingname {
     position: absolute;
     top: 20%;
-    font-size: 2.0em;
+    font-size: 1.6em;
     width: 100%;
     font-weight: bold;
     color: #fff;
@@ -28,17 +28,21 @@ ion-card {
     top: 35%;
     font-size: 1.2em;
     width: 100%;
-    font-weight: bold;
+    font-weight: normal;
     color: #fff;
   }
 
     .card-weddingkey {
     position: absolute;
     top: 45%;
-    font-size: 2.0em;
+    font-size: 1.6em;
     width: 100%;
     font-weight: bold;
     color: #fff;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
   }
 
 
