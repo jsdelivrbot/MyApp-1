@@ -10,27 +10,22 @@
         </button>
       </ion-buttons>
   </ion-navbar>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar (ionInput)="searchContacts($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
 
-
-
-<!--     <ion-list>
+  <div *ngIf="searching">
+    <ion-list>
       <ion-item *ngFor="let contact of sortedContacts">
-        <ion-label>{{contact.firstName}} {{contact.lastName}}</ion-label>
+        <ion-label>{{contact?.firstName}} {{contact?.lastName}} {{contact?.email}}</ion-label>
           <ion-checkbox checked="false" [(ngModel)]="contact.checked" color="amethyst" item-right (click) = "checkedContact(contact, contact.checked)"></ion-checkbox>
       </ion-item>
-    </ion-list> -->
- 
-<!--     <ion-list>
-      <ion-item *ngFor="let contact of sortedContacts">
-        <ion-label>{{contact._objectInstance?.name.givenName}} {{contact._objectInstance?.name.familyName}}</ion-label>
-          <ion-checkbox checked="false" [(ngModel)]="contact.checked" color="amethyst" item-right (click) = "checkedContact(contact, contact.checked)"></ion-checkbox>
-      </ion-item>
-    </ion-list> -->
+    </ion-list>  
+   </div>   
 
+
+  <div *ngIf="!searching">
     <ion-item-group *ngFor="let group of groupedContacts">
  
       <ion-item-divider color="amethyst-reverse">{{group.letter}}</ion-item-divider>
@@ -40,6 +35,7 @@
       </ion-item>
  
     </ion-item-group>
+  </div>
 
 
 </ion-content>
