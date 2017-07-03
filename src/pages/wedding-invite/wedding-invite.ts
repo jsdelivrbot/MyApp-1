@@ -13,24 +13,17 @@ import { WeddingInviteGuestsPage } from '../wedding-invite-guests/wedding-invite
 })
 export class WeddingInvitePage {
 	weddingData;
-  //weddingName;
-  //weddingKey;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public af: AngularFire) {
     this.weddingData = navParams.data.weddingData;
-    //this.weddingName = navParams.get('weddingName');
-    //this.weddingKey = navParams.get('weddingKey');
-
   }
 
-//TODO: display weddingName and weddingkey from NavParams
-//TODO: navigate to import page on button click
   goToTabsPage(){
     this.navCtrl.setRoot(TabsPage);
   }
 
   goToContacts(){
-    this.navCtrl.push(WeddingInviteGuestsPage);
+    this.navCtrl.push(WeddingInviteGuestsPage, {weddingData: this.weddingData});
   }
 
 }

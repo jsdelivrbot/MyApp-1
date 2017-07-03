@@ -3,7 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
-import { Contacts, ContactFieldType, ContactFindOptions } from 'ionic-native';
+import { Contacts, ContactFieldType, ContactFindOptions, EmailComposer } from 'ionic-native';
 import { LoadingProvider } from '../../providers/loading';
 
 import { TabsPage } from '../tabs/tabs';
@@ -126,8 +126,20 @@ export class WeddingInviteGuestsPage {
     this.navCtrl.setRoot(TabsPage);
   }
 
-  goToEmailInvite(){
-    console.log(this.contactsForEmail);
+  sendEmailInvite(){
+    let emailSubject = this.weddingData.weddingName;
+    let emailBody = this.weddingData.fianceName + " and I are using WeddingApp to collect pictures and chat with guests. We want you to join us!<br><br>" + "Download the WeddingApp and signup as a guest by entering the following Wedding Key.<br><br>" + "Wedding Key:<br>" + this.weddingData.weddingKey + "<br><br>" + "iPhone:<br>" + "AppleStore link<br><br>" + "Android:<br>" + "GoogleStore link<br><br>";
+
+    let email = {
+      to: this.contactsForEmail,
+      subject: emailSubject,
+      body: emailBody, 
+      isHTML: true
+    };
+    EmailComposer.open(email);
+    setTimeout(() => {
+      this.navCtrl.setRoot(TabsPage);
+    }, 1000);
   }
 
   checkedContact(contact, checked){
@@ -141,17 +153,15 @@ export class WeddingInviteGuestsPage {
   }
 
   addContactsForEmail(contact){
-    this.contactsForEmail.push(contact);
-      console.log(this.contactsForEmail);
+    this.contactsForEmail.push(contact.email);
     }
 
   removeContactsForEmail(contact){
     for(var i = 0; i < this.contactsForEmail.length; i++) {
-      if(this.contactsForEmail[i] == contact){
+      if(this.contactsForEmail[i] == contact.email){
         this.contactsForEmail.splice(i, 1);
       }
     }
-    console.log(this.contactsForEmail);
   }
 
 
@@ -159,11 +169,9 @@ export class WeddingInviteGuestsPage {
 
     this.searching = true;
     this.sortedContacts = this.nonNullContacts;
-    console.log(this.sortedContacts);
 
     // set searchedContacts to the value of the searchbar
     var searchedContacts = searchContactsBar.srcElement.value;
-    console.log(searchedContacts);
 
     if(!searchedContacts) {
       this.searching = false;

@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="weddingCreateForm" (submit)="createWedding(weddingName)" novalidate>
+  <form [formGroup]="weddingCreateForm" (submit)="createWedding(weddingName, fianceName)" novalidate>
     
     <ion-item>
       
@@ -19,6 +19,18 @@
 
     <ion-item class="error-message" *ngIf="!weddingCreateForm.controls.weddingName.valid && submitAttempt">
       <p>Please enter a wedding name.</p>
+    </ion-item>
+
+    <ion-item>
+      
+      <ion-label stacked>Fiance's Name</ion-label>
+
+        <ion-input [(ngModel)]="fianceName" formControlName="fianceName" type="text" placeholder="Enter your fiance's first name" [class.invalid]="!weddingCreateForm.controls.fianceName.valid"></ion-input>
+
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="!weddingCreateForm.controls.fianceName.valid && submitAttempt">
+      <p>Please enter your fiance's first name.</p>
     </ion-item>
 
   <button color="amethyst" ion-button block type="submit">

@@ -4,9 +4,8 @@
       Contacts
     </ion-title>
     <ion-buttons end>
-        <button ion-button (click)="goToEmailInvite()">
-          Next
-          <ion-icon name="arrow-forward"></ion-icon>
+        <button ion-button icon-only (click)="sendEmailInvite()">
+          <ion-icon name="send"></ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>
@@ -18,7 +17,7 @@
   <div *ngIf="searching">
     <ion-list>
       <ion-item *ngFor="let contact of sortedContacts">
-        <ion-label>{{contact?.firstName}} {{contact?.lastName}} {{contact?.email}}</ion-label>
+        <ion-label>{{contact?.firstName}} {{contact?.lastName}}: {{contact?.email}}</ion-label>
           <ion-checkbox checked="false" [(ngModel)]="contact.checked" color="amethyst" item-right (click) = "checkedContact(contact, contact.checked)"></ion-checkbox>
       </ion-item>
     </ion-list>  
@@ -30,7 +29,7 @@
  
       <ion-item-divider color="amethyst-reverse">{{group.letter}}</ion-item-divider>
       <ion-item *ngFor="let contact of group.contacts">
-        <ion-label>{{contact.firstName}} {{contact.lastName}} {{contact.email}}</ion-label>
+        <ion-label>{{contact.firstName}} {{contact.lastName}}: {{contact.email}}</ion-label>
           <ion-checkbox checked="false" [(ngModel)]="contact.checked" color="amethyst" item-right (click) = "checkedContact(contact, contact.checked)"></ion-checkbox>
       </ion-item>
  

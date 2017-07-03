@@ -14,6 +14,7 @@ export class WeddingCreatePage {
 	public weddingCreateForm;
 	submitAttempt: boolean = false;
 	public weddingName: String;
+  public fianceName: String;
 	public userProfileRef: any;
   public weddingRef: any;
   public newWeddingKey: any;
@@ -23,24 +24,31 @@ export class WeddingCreatePage {
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public alertCtrl: AlertController, public af: AngularFire) {
   	this.weddingCreateForm = formBuilder.group({
-      weddingName: ['', Validators.compose([Validators.required])]
+      weddingName: ['', Validators.compose([Validators.required])],
+      fianceName: ['', Validators.compose([Validators.required])]
     });
 	this.userProfileRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid);
   this.weddingRef = firebase.database().ref('/Weddings');
   }
 
-  createWedding(weddingName){
+  createWedding(weddingName, fianceName){
   	this.submitAttempt = true;
     this.weddingName = weddingName;
+    this.fianceName = fianceName;
     this.weddingCreator = firebase.auth().currentUser.uid;
 
     if(this.weddingName === ""){
       this.weddingName = null;
     }
+
+    if(this.fianceName === ""){
+      this.fianceName = null;
+    }
   	
-  	if(this.weddingName != null){
+  	if(this.weddingName != null && this.fianceName != null){
       var newWedding = {
       weddingName: this.weddingName,
+      fianceName: this.fianceName,
       weddingCreator: this.weddingCreator
       };
 
@@ -51,6 +59,7 @@ export class WeddingCreatePage {
       this.weddingRef.update(updates);
       this.weddingData = {
         weddingName: this.weddingName,
+        fianceName: this.fianceName,
         weddingKey: this.newWeddingKey
       };
       this.firstLogin = "false";
