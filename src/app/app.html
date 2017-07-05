@@ -13,6 +13,18 @@
         {{p.title}}
       </button>
     </ion-list>
+
+  <div>
+    <ion-list>
+      <ion-list-header>
+      Weddings
+      </ion-list-header>
+        <button color="amethyst-reverse" ion-item menuClose *ngFor="let wedding of weddingList" >
+          {{wedding.weddingName}}
+        </button>
+    </ion-list>
+  </div>
+
   </ion-content>
 
 </ion-menu>

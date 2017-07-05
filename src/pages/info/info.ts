@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 import {LoginPage} from '../login/login';
 import {EventsPage} from '../events/events';
@@ -20,16 +21,36 @@ import firebase from 'firebase';
 })
 export class InfoPage {
   eventsPage = EventsPage;
+  public weddingList = [];
+  public weddingListRef: any;
+  public currentUser: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
   this.navCtrl = navCtrl;
 
     firebase.auth().onAuthStateChanged(function(user) {
-    if (!user) {
-      navCtrl.setRoot(LoginPage);
-    }
-      }); 
+      if (!user) {
+        navCtrl.setRoot(LoginPage);
+      }
+    }); 
 
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad InfoPage');
+    this.initializeWeddings();
+  }
+
+  initializeWeddings(){
+    this.weddingListRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/weddingList');
+    this.weddingListRef.on('value', weddingList => {
+    let weddings = [];
+      weddingList.forEach( wedding => {
+        weddings.push(wedding.val());
+      });
+      this.weddingList = weddings;
+      this.events.publish('UPDATE_SIDE_MENU', this.weddingList);
+    });
   }
 
   goToWeddingEvents(){
@@ -42,11 +63,6 @@ export class InfoPage {
 
   goToWeddingRegistries(){
   this.navCtrl.push(RegistriesPage);
-  }
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoPage');
   }
 
 }
