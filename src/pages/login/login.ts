@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../providers/auth-service';
+import { LoadingProvider } from '../../providers/loading';
 import firebase from 'firebase';
 
+import { IntroPage } from '../intro/intro';
 import { RegisterPage } from '../register/register';
 import { ResetpwdPage } from '../resetpwd/resetpwd';
 import { WeddingChoicePage } from '../wedding-choice/wedding-choice';
@@ -30,7 +32,7 @@ export class LoginPage {
   public firstLoginRef: any;
   public firstLogin: any;
 
-  constructor(public navCtrl: NavController, public authService: AuthService, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public authService: AuthService, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingProvider: LoadingProvider) {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
@@ -55,39 +57,32 @@ export class LoginPage {
 
   loginUser(){
     this.submitAttempt = true;
-
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
     } else {
+      this.loadingProvider.show();
       this.authService.doLogin(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
-        
         this.firstLoginRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/firstLogin');
-        
         this.firstLoginRef.once('value', (data) => {
         this.firstLogin = data.val();
           // You need an IF statement for firstLogin to forward to create/join page else goto InfoPage
           if (this.firstLogin == "true"){
-            console.log("TRUE");
-            this.navCtrl.setRoot(LoginPage);
+            this.navCtrl.setRoot(IntroPage);
             this.navCtrl.push(WeddingChoicePage);
 
           }
           else if (this.firstLogin == "false"){
-            console.log("FALSE");
             this.navCtrl.setRoot(TabsPage);
             this.navCtrl.push(TabsPage);
           }
           else {
             console.error("OTHER");
-            this.navCtrl.setRoot(TabsPage);
-            this.navCtrl.push(TabsPage);
+            this.navCtrl.setRoot(IntroPage);
+            this.navCtrl.push(IntroPage);
           }
-        
+        this.loadingProvider.hide();
         });
-
-
       }, error => {
-        this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
             message: error.message,
             buttons: [
@@ -98,13 +93,7 @@ export class LoginPage {
             ]
           });
           alert.present();
-        });
       });
-
-      this.loading = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
-      this.loading.present();
     }
   }
 

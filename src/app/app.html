@@ -14,10 +14,18 @@
       </button>
     </ion-list>
 
+<!--     <ion-list>
+      <button color="amethyst-reverse" ion-item menuClose (click)="goToManageWedding()">
+        <ion-icon item-left name="options"></ion-icon>
+        Manage My Wedding
+      </button>
+    </ion-list> -->
+
+
   <div>
     <ion-list>
-      <ion-list-header>
-      Weddings
+      <ion-list-header class="menuListHeader">
+      Your Weddings:
       </ion-list-header>
         <button color="amethyst-reverse" ion-item menuClose *ngFor="let wedding of weddingList" >
           {{wedding.weddingName}}
@@ -28,6 +36,6 @@
   </ion-content>
 
 </ion-menu>
-<ion-nav #content [root]="rootPage"></ion-nav>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>
 
 

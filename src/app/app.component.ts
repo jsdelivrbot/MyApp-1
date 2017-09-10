@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Events } from 'ionic-angular';
 
@@ -7,6 +7,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { IntroPage } from '../pages/intro/intro';
+import { InfoPage } from '../pages/info/info';
+import { WeddingJoinPage } from '../pages/wedding-join/wedding-join';
+import { WeddingCreatePage } from '../pages/wedding-create/wedding-create';
 
 import { AuthService } from '../providers/auth-service';
 import firebase from 'firebase';
@@ -33,7 +36,10 @@ export class MyApp {
   // set our app's pages
   appPages: PageInterface[] = [
     { title: 'My Profile', component: ProfilePage, index: 0, icon: 'person' },
-    { title: 'Logout', component: TabsPage, index: 1, icon: 'log-out' },
+    { title: 'Create New', component: WeddingCreatePage, index: 1, icon: 'add'},
+    { title: 'Join Another', component: WeddingJoinPage, index: 2, icon: 'checkmark'},
+    { title: 'Manage My Wedding', component: ProfilePage, index: 3, icon: 'options'},
+    { title: 'Logout', component: LoginPage, index: 4, icon: 'log-out' },
 
   ];
 
@@ -58,15 +64,15 @@ export class MyApp {
 
     this.menu.close();
 
-    if (page.index !=1) {
-      this.nav.setRoot(page.component, { tabIndex: page.index });
+    if (page.index !=4) {
+      this.nav.push(page.component, { tabIndex: page.index });
 
     }
 
-    else if (page.index = 1){
+    else if (page.index = 4){
     //console.log("LOGOUT");
     this.authService.doLogout();
-    this.nav.setRoot(LoginPage);
+    this.nav.setRoot(IntroPage);
     }
 
     else {

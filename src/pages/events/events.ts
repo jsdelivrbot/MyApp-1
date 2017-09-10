@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {EventdetailsPage} from '../eventdetails/eventdetails';
-
-
+import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 
@@ -19,11 +18,18 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 
 export class EventsPage {
-  events: FirebaseListObservable<any>;
+  public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public events: FirebaseListObservable<any>;
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-  this.events = af.database.list('/Events');
+  this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+  this.currentWeddingKeyRef.once('value', (data) => {
+    this.currentWeddingKey = data.val();
+    this.events = af.database.list('/Weddings/' + this.currentWeddingKey + '/Events');
+    });
   }
 
   goToEventDetails(event){

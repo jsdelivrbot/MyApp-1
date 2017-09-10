@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AccommodationdetailsPage} from '../accommodationdetails/accommodationdetails';
-
+import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 /*
@@ -15,10 +15,17 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
   templateUrl: 'accommodations.html'
 })
 export class AccommodationsPage {
-  accommodations: FirebaseListObservable<any>;
+  public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public accommodations: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-  this.accommodations = af.database.list('/Accommodations');
+  
+  this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+  this.currentWeddingKeyRef.once('value', (data) => {
+    this.currentWeddingKey = data.val();
+    this.accommodations = af.database.list('/Weddings/' + this.currentWeddingKey + '/Accommodations');
+    });
   }
 
 goToAccomDetails(accommodation){

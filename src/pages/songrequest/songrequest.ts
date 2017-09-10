@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MusicSearch } from '../../providers/music-search';
-import firebase from 'firebase';
 import { LoadingProvider } from '../../providers/loading';
 import { Musicsearchfilter } from '../../pipes/musicsearchfilter';
 import {PlaylistPage} from '../playlist/playlist';
+import firebase from 'firebase';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 /*
   Generated class for the Songrequest page.
@@ -21,15 +22,21 @@ export class SongrequestPage {
 public songName: any;
 public artistName: any;
 public songs: any;
-public songList: any;
+public currentWeddingKeyRef: any;
+public currentWeddingKey: any;
+public songList: FirebaseListObservable<any>;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public musicSearch: MusicSearch, public loadingProvider: LoadingProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public musicSearch: MusicSearch, public loadingProvider: LoadingProvider, af: AngularFire) {
   this.songName = this.navParams.get('song');
   this.artistName = this.navParams.get('artist');
   this.loadingProvider.show();
   this.loadSongs();
-  this.songList = firebase.database().ref('/Songs');
+  this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+  this.currentWeddingKeyRef.once('value', (data) => {
+    this.currentWeddingKey = data.val();
+    this.songList = af.database.list('/Weddings/' + this.currentWeddingKey + '/Songs');
+    });
 
   }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
 import {RegistrydetailsPage} from '../registrydetails/registrydetails';
+import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 /*
@@ -15,10 +15,16 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
   templateUrl: 'registries.html'
 })
 export class RegistriesPage {
-  registries: FirebaseListObservable<any>;
+  public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public registries: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-  this.registries = af.database.list('/Registries');
+  this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+  this.currentWeddingKeyRef.once('value', (data) => {
+    this.currentWeddingKey = data.val();
+    this.registries = af.database.list('/Weddings/' + this.currentWeddingKey + '/Registries');
+    });
   }
 
   goToRegistryDetails(registry){

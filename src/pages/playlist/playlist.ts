@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import {PlaylistdetailsPage} from '../playlistdetails/playlistdetails';
 import {SearchmusicPage} from '../searchmusic/searchmusic';
 import firebase from 'firebase';
-
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 
@@ -20,11 +19,18 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 
 export class PlaylistPage {
-	songs: FirebaseListObservable<any>;
+	public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public songs: FirebaseListObservable<any>;
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-	this.songs = af.database.list('/Songs');
+	this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+  this.currentWeddingKeyRef.once('value', (data) => {
+    this.currentWeddingKey = data.val();
+    this.songs = af.database.list('/Weddings/' + this.currentWeddingKey + '/Songs');
+    });
   }
 
     goToPlaylistDetails(song){
