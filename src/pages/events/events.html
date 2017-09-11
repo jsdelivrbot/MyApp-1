@@ -15,13 +15,15 @@
 
 <ion-content>
 
-<ion-list>
-    <ion-item color = amethyst-reverse detail-push *ngFor="let event of events | async" (click)="goToEventDetails(event)">
-      <!--<ion-icon name="arrow-forward" item-right></ion-icon>-->
-      {{event.name}}
-    </ion-item>
-</ion-list>
+  <ion-fab *ngIf="isWeddingCreator" top right edge>
+      <button ion-fab color="amethyst-reverse" (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
-
+  <ion-list>
+      <ion-item color = amethyst-reverse detail-push *ngFor="let event of events | async" (click)="goToEventDetails(event)">
+        <!--<ion-icon name="arrow-forward" item-right></ion-icon>-->
+        {{event.name}}
+      </ion-item>
+  </ion-list>
 
 </ion-content>

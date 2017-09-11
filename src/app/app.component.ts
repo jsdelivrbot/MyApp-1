@@ -38,7 +38,7 @@ export class MyApp {
     { title: 'My Profile', component: ProfilePage, index: 0, icon: 'person' },
     { title: 'Create New', component: WeddingCreatePage, index: 1, icon: 'add'},
     { title: 'Join Another', component: WeddingJoinPage, index: 2, icon: 'checkmark'},
-    { title: 'Manage My Wedding', component: ProfilePage, index: 3, icon: 'options'},
+    { title: 'Manage Guests', component: ProfilePage, index: 3, icon: 'people'},
     { title: 'Logout', component: LoginPage, index: 4, icon: 'log-out' },
 
   ];
@@ -55,6 +55,7 @@ export class MyApp {
     events.subscribe("UPDATE_SIDE_MENU", (weddingList) => {
       this.weddingList = weddingList;
     });
+    this.menu.swipeEnable(false);
   }
 
   openPage(page: PageInterface) {
