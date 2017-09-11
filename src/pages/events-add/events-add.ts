@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {EventdetailsPage} from '../eventdetails/eventdetails';
-import {EventsAddPage} from '../events-add/events-add';
-import {EventEditPage} from '../event-edit/event-edit';
+import {EventsPage} from '../events/events';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
@@ -14,18 +12,19 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-events',
-  templateUrl: 'events.html'
+  selector: 'page-events-add',
+  templateUrl: 'events-add.html'
 })
 
 
-export class EventsPage {
+export class EventsAddPage {
   public currentWeddingKeyRef: any;
   public currentWeddingKey: any;
   public events: FirebaseListObservable<any>;
   public weddingCreatorRef: any;
   public weddingCreator: any;
   public isWeddingCreator: any;
+  public alertUser: boolean = false;
 
 
 
@@ -45,26 +44,36 @@ export class EventsPage {
     }); 
   }
 
-  goToEventDetails(event){
-		this.navCtrl.push(EventdetailsPage, { event: event });
-	}
-
-  addEvents(){
-    this.navCtrl.push(EventsAddPage);
-  }
-
-  deleteEvent(event){
-    this.events.remove(event);
-  }
-
-  editEvent(event){
-    this.navCtrl.push(EventEditPage, { event: event });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EventsPage');
-
-
+  saveEvent(name, location, address, date, time, description){
+    if((name == null) || (name == "")){
+      this.alertUser = true;
+    }
+    else{
+      if(location == null){
+        location = "";
+      }
+      if(address == null){
+        address = "";
+      }
+      if(date == null){
+        date = "";
+      }
+      if(time == null){
+        time = "";
+      }
+      if(description == null){
+        description = "";
+      }
+      this.events.push({
+        name: name,
+        location: location,
+        address: address,
+        date: date,
+        time: time,
+        description: description
+      });
+      this.navCtrl.pop(EventsPage);
+    }
   }
 
 

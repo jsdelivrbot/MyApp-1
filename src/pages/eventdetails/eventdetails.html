@@ -16,6 +16,10 @@
 
 <ion-content>
 
+<ion-fab *ngIf="isWeddingCreator" top right edge>
+  <button ion-fab color="amethyst-reverse" (click)="editEvent(event)"><ion-icon name="create"></ion-icon></button>
+</ion-fab>
+
 <ion-label color="amethyst" class="label">
   Location:
 </ion-label>

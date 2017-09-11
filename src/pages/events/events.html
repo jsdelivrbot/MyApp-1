@@ -16,14 +16,31 @@
 <ion-content>
 
   <ion-fab *ngIf="isWeddingCreator" top right edge>
-      <button ion-fab color="amethyst-reverse" (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab color="amethyst-reverse" (click)="addEvents()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
   <ion-list>
-      <ion-item color = amethyst-reverse detail-push *ngFor="let event of events | async" (click)="goToEventDetails(event)">
-        <!--<ion-icon name="arrow-forward" item-right></ion-icon>-->
+    <ion-item-sliding *ngFor="let event of events | async">
+
+      <ion-item color = amethyst-reverse (click)="goToEventDetails(event)" tappable detail-push>
         {{event.name}}
       </ion-item>
-  </ion-list>
+
+        <ion-item-options side="right">
+
+          <button ion-button color="primary" (click)="editEvent(event)">
+            <ion-icon name="create"></ion-icon>
+            Edit
+          </button>
+
+          <button ion-button color="danger" (click)="deleteEvent(event)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+
+        </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>  
 
 </ion-content>

@@ -8,6 +8,8 @@ import { ChatsPage } from '../pages/chats/chats';
 import { GroupAddPage } from '../pages/group-add/group-add';
 import { GroupchatPage } from '../pages/groupchat/groupchat';
 import { EventsPage } from '../pages/events/events';
+import { EventsAddPage } from '../pages/events-add/events-add';
+import { EventEditPage } from '../pages/event-edit/event-edit';
 import { EventdetailsPage } from '../pages/eventdetails/eventdetails';
 import { AccommodationsPage } from '../pages/accommodations/accommodations';
 import { AccommodationdetailsPage } from '../pages/accommodationdetails/accommodationdetails';
@@ -73,6 +75,8 @@ const cloudSettings: CloudSettings = {
     GroupAddPage,
     GroupchatPage,
     EventsPage,
+    EventsAddPage,
+    EventEditPage,
     EventdetailsPage,
     AccommodationsPage,
     AccommodationdetailsPage,
@@ -111,6 +115,8 @@ const cloudSettings: CloudSettings = {
     GroupAddPage,
     GroupchatPage,
     EventsPage,
+    EventsAddPage,
+    EventEditPage,
     EventdetailsPage,
     AccommodationsPage,
     AccommodationdetailsPage,
