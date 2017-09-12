@@ -12,6 +12,8 @@ import { EventsAddPage } from '../pages/events-add/events-add';
 import { EventEditPage } from '../pages/event-edit/event-edit';
 import { EventdetailsPage } from '../pages/eventdetails/eventdetails';
 import { AccommodationsPage } from '../pages/accommodations/accommodations';
+import { AccommodationsAddPage } from '../pages/accommodations-add/accommodations-add';
+import { AccommodationEditPage } from '../pages/accommodation-edit/accommodation-edit';
 import { AccommodationdetailsPage } from '../pages/accommodationdetails/accommodationdetails';
 import { RegistriesPage } from '../pages/registries/registries';
 import { RegistrydetailsPage } from '../pages/registrydetails/registrydetails';
@@ -79,6 +81,8 @@ const cloudSettings: CloudSettings = {
     EventEditPage,
     EventdetailsPage,
     AccommodationsPage,
+    AccommodationsAddPage,
+    AccommodationEditPage,
     AccommodationdetailsPage,
     RegistriesPage,
     RegistrydetailsPage,
@@ -119,6 +123,8 @@ const cloudSettings: CloudSettings = {
     EventEditPage,
     EventdetailsPage,
     AccommodationsPage,
+    AccommodationsAddPage,
+    AccommodationEditPage,
     AccommodationdetailsPage,
     RegistriesPage,
     RegistrydetailsPage,
