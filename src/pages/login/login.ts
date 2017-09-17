@@ -84,8 +84,14 @@ export class LoginPage {
         });
       }, error => {
           let alert = this.alertCtrl.create({
-            message: error.message,
+            message: "The email or password you entered is incorrect",
             buttons: [
+              {
+                text: "Forgot Password",
+                handler: () =>{
+                  this.resetPwd();
+                }
+              },
               {
                 text: "Ok",
                 role: 'cancel'
@@ -93,6 +99,7 @@ export class LoginPage {
             ]
           });
           alert.present();
+          this.loadingProvider.hide();
       });
     }
   }
