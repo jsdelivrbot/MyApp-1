@@ -15,6 +15,10 @@
 
 <ion-content>
 
+<ion-fab *ngIf="isWeddingCreator" top right edge>
+  <button ion-fab color="amethyst-reverse" (click)="editRegistry(registry)"><ion-icon name="create"></ion-icon></button>
+</ion-fab>
+
 <ion-label color="amethyst">
   Website:
 </ion-label>

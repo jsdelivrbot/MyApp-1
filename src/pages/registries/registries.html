@@ -15,11 +15,32 @@
 
 <ion-content>
 
+<ion-fab *ngIf="isWeddingCreator" top right edge>
+    <button ion-fab color="amethyst-reverse" (click)="addRegistry()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+
 <ion-list>
-    <ion-item color = amethyst-reverse detail-push *ngFor="let registry of registries | async" (click)="goToRegistryDetails(registry)">
-      <!--<ion-icon name="arrow-forward" item-right></ion-icon>-->
+  <ion-item-sliding *ngFor="let registry of registries | async">
+
+    <ion-item color = amethyst-reverse tappable detail-push (click)="goToRegistryDetails(registry)">
       {{registry.name}}
     </ion-item>
+
+      <ion-item-options side="right" [hidden]="!isWeddingCreator">
+
+        <button ion-button color="primary" (click)="editRegistry(registry)">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+
+        <button ion-button color="danger" (click)="deleteRegistry(registry)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+
+      </ion-item-options>
+
+  </ion-item-sliding>
 </ion-list>
 
 

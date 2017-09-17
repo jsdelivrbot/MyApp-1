@@ -16,6 +16,8 @@ import { AccommodationsAddPage } from '../pages/accommodations-add/accommodation
 import { AccommodationEditPage } from '../pages/accommodation-edit/accommodation-edit';
 import { AccommodationdetailsPage } from '../pages/accommodationdetails/accommodationdetails';
 import { RegistriesPage } from '../pages/registries/registries';
+import { RegistriesAddPage } from '../pages/registries-add/registries-add';
+import { RegistryEditPage } from '../pages/registry-edit/registry-edit';
 import { RegistrydetailsPage } from '../pages/registrydetails/registrydetails';
 import { PlaylistPage } from '../pages/playlist/playlist';
 import { PlaylistdetailsPage } from '../pages/playlistdetails/playlistdetails';
@@ -85,6 +87,8 @@ const cloudSettings: CloudSettings = {
     AccommodationEditPage,
     AccommodationdetailsPage,
     RegistriesPage,
+    RegistriesAddPage,
+    RegistryEditPage,
     RegistrydetailsPage,
     PlaylistPage,
     PlaylistdetailsPage,
@@ -127,6 +131,8 @@ const cloudSettings: CloudSettings = {
     AccommodationEditPage,
     AccommodationdetailsPage,
     RegistriesPage,
+    RegistriesAddPage,
+    RegistryEditPage,
     RegistrydetailsPage,
     PlaylistPage,
     PlaylistdetailsPage,

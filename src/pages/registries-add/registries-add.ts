@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {AccommodationsPage} from '../accommodations/accommodations';
+import {RegistriesPage} from '../registries/registries';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
@@ -12,15 +12,15 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-accommodations-add',
-  templateUrl: 'accommodations-add.html'
+  selector: 'page-registries-add',
+  templateUrl: 'registries-add.html'
 })
 
 
-export class AccommodationsAddPage {
+export class RegistriesAddPage {
   public currentWeddingKeyRef: any;
   public currentWeddingKey: any;
-  public accommodations: FirebaseListObservable<any>;
+  public registries: FirebaseListObservable<any>;
   public weddingCreatorRef: any;
   public weddingCreator: any;
   public isWeddingCreator: any;
@@ -32,7 +32,7 @@ export class AccommodationsAddPage {
     this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
     this.currentWeddingKeyRef.once('value', (data) => {
       this.currentWeddingKey = data.val();
-      this.accommodations = af.database.list('/Weddings/' + this.currentWeddingKey + '/Accommodations');
+      this.registries = af.database.list('/Weddings/' + this.currentWeddingKey + '/Registries');
     }).then((weddingCreator) => {
     this.weddingCreatorRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingCreator/');
       this.weddingCreatorRef.once('value', (data1) => {
@@ -44,27 +44,23 @@ export class AccommodationsAddPage {
     }); 
   }
 
-  saveAccommodation(name, address, website, description){
+  saveRegistry(name, website, note){
     if((name == null) || (name == "")){
       this.alertUser = true;
     }
     else{
-      if(address == null){
-        address = "";
-      }
       if(website == null){
         website = "";
       }
-      if(description == null){
-        description = "";
+      if(note == null){
+        note = "";
       }
-      this.accommodations.push({
+      this.registries.push({
         name: name,
-        address: address,
         website: website,
-        description: description
+        note: note
       });
-      this.navCtrl.pop(AccommodationsPage);
+      this.navCtrl.pop(RegistriesPage);
     }
   }
 
