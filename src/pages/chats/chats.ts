@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { LoadingProvider } from '../../providers/loading';
@@ -21,18 +22,26 @@ import { GroupchatPage } from '../groupchat/groupchat';
   templateUrl: 'chats.html'
 })
 export class ChatsPage {
-	groupsRef: any;
-	groupList: any;
-	filteredGroupList: any;
-	peopleRef: any;
-	peopleList: any;
-	filteredPeopleList: any;
-	chatType: string = "groups";
+	public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public groupsRef: any;
+	public groupList: any;
+	public filteredGroupList: any;
+	public peopleRef: any;
+	public peopleList: any;
+	public filteredPeopleList: any;
+	public chatType: string = "groups";
 
 	
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
-  	this.groupsRef = firebase.database().ref('/Weddings/0/weddingGroups');
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider, public events: Events) {
+  	this.loadingProvider.show();
+    this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+    this.currentWeddingKeyRef.once('value', (data) => {
+      this.currentWeddingKey = data.val();
+    }).then((initializeGroups) => {
+
+    this.groupsRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingGroups');
   	this.groupsRef.on('value', groupList => {
   	let groups = [];
   		groupList.forEach( group => {
@@ -44,7 +53,7 @@ export class ChatsPage {
 
   	this.initializeGroups();
   	
-  	this.peopleRef = firebase.database().ref('/Weddings/0/weddingPeople');
+  	this.peopleRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingPeople');
   	this.peopleRef.on('value', peopleList => {
   	let people = [];
   		peopleList.forEach( person => {
@@ -55,22 +64,63 @@ export class ChatsPage {
   	});
 
   	this.initializePeople();
+    });
 
   }
 
+
   initializeGroups(): void {
   	this.groupList = this.filteredGroupList;
+    this.loadingProvider.hide();
   }
 
   initializePeople(): void {
   	this.peopleList = this.filteredPeopleList;
+    this.loadingProvider.hide();
   }
 
   ionViewDidLoad() {
     // loads list of groups when page loads
     setTimeout(() => {
       this.initializeGroups();
-    }, 500);
+    }, 250);
+  }
+
+  ionViewWillEnter(){
+    
+    this.events.subscribe("SET_CURRENT_WEDDING_KEY", (currentWeddingKey) => {
+
+      this.loadingProvider.show();
+      this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+      this.currentWeddingKeyRef.once('value', (data) => {
+        this.currentWeddingKey = data.val();
+      }).then((initializeGroups) => {
+
+      this.groupsRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingGroups');
+      this.groupsRef.on('value', groupList => {
+      let groups = [];
+        groupList.forEach( group => {
+          groups.push(group.val());
+        });
+        this.groupList = groups;
+        this.filteredGroupList = groups;
+      });
+
+      this.initializeGroups();
+      
+      this.peopleRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingPeople');
+      this.peopleRef.on('value', peopleList => {
+      let people = [];
+        peopleList.forEach( person => {
+          people.push(person.val());
+        });
+        this.peopleList = people;
+        this.filteredPeopleList = people;
+      });
+
+      this.initializePeople();
+      });
+    });
   }
 
   goToGroupAddPage(){

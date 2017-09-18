@@ -8,6 +8,9 @@
 
   <ion-navbar color="amethyst">
     <ion-title align="center">Chat</ion-title>
+    <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
   </ion-navbar>
 
 </ion-header>
@@ -46,7 +49,8 @@
   			(ionCancel)="onCancel($event)">
 			</ion-searchbar>-->
 
-    		
+ <!--    		  <ion-spinner color="amethyst" name="crescent" [hidden]="!infoDataLoaded"></ion-spinner> -->
+
   				<ion-item color = "amethyst-reverse" detail-push *ngFor="let group of groupList" (click)="goToGroupChat(group)">
     				<ion-avatar item-left>
       					<img src={{group.groupPhotoURL}}>
