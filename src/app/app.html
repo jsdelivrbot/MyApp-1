@@ -27,7 +27,7 @@
       <ion-list-header class="menuListHeader">
       Your Weddings:
       </ion-list-header>
-        <button color="amethyst-reverse" ion-item menuClose *ngFor="let wedding of weddingList" >
+        <button color="amethyst-reverse" ion-item menuClose *ngFor="let wedding of weddingList" (click)="selectWedding(wedding)" >
           {{wedding.weddingName}}
         </button>
     </ion-list>

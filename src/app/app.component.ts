@@ -30,6 +30,8 @@ export class MyApp {
   public weddingList = [];
   public weddingListRef: any;
   public currentUser: any;
+  public userProfileRef: any;
+  public currentWedding: any;
   @ViewChild(Nav) nav: Nav;
 
 
@@ -81,6 +83,14 @@ export class MyApp {
         console.log("Didn't set nav root");
       });
     }
+  }
+
+  selectWedding(wedding){
+    this.userProfileRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/');
+    this.userProfileRef.update({
+      currentWedding: wedding.weddingKey
+    });
+    this.events.publish('SET_CURRENT_WEDDING_KEY', wedding.weddingKey);
   }
 
 }
