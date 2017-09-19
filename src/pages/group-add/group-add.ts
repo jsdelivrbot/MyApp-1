@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import firebase from 'firebase';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Platform, ActionSheetController } from 'ionic-angular';
+import { LoadingProvider } from '../../providers/loading';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ChatsPage } from '../chats/chats';
 
@@ -18,7 +19,9 @@ import { Camera } from 'ionic-native';
   templateUrl: 'group-add.html'
 })
 export class GroupAddPage {
-	people: FirebaseListObservable<any>;
+	public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
+  public people: FirebaseListObservable<any>;
 	public groupName: any;
 	public groupNameObject: string;
 	public groupNameObjectString: string;
@@ -31,11 +34,17 @@ export class GroupAddPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder) {
-	this.people = af.database.list('/Weddings/0/weddingPeople');
-	this.weddingGroup = firebase.database().ref('/Weddings/0/weddingGroups/');
-  this.imageSrc = "../assets/images/profile_avatar.png"
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public actionSheetCtrl: ActionSheetController, public platform: Platform, public alertCtrl: AlertController, public formBuilder: FormBuilder, public loadingProvider: LoadingProvider) {
+	 this.loadingProvider.show();
+   this.imageSrc = "../assets/images/profile_avatar.png";
+   this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+    this.currentWeddingKeyRef.once('value', (data) => {
+      this.currentWeddingKey = data.val();
+    }).then((weddingGroupPeople) => {
+        this.people = af.database.list('/Weddings/' + this.currentWeddingKey + '/weddingPeople');
+      	this.weddingGroup = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingGroups/');
+        this.loadingProvider.hide();
+      });
   }
 
   ionViewDidLoad() {
