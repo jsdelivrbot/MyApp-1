@@ -27,6 +27,7 @@ export interface PageInterface {
   providers:[AuthService]
 })
 export class MyApp {
+  public rootPage: any;
   public weddingList = [];
   public weddingListRef: any;
   public currentUser: any;
@@ -45,9 +46,10 @@ export class MyApp {
 
   ];
 
-  rootPage = IntroPage;
+  //rootPage = IntroPage;
 
   constructor(platform: Platform, public menu: MenuController, public authService: AuthService, public events: Events) {
+    this.rootPage = IntroPage;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

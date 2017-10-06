@@ -35,7 +35,7 @@ export class ChatsPage {
 	
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider, public events: Events) {
-  	this.loadingProvider.show();
+    this.loadingProvider.show();
     this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
     this.currentWeddingKeyRef.once('value', (data) => {
       this.currentWeddingKey = data.val();
@@ -70,12 +70,12 @@ export class ChatsPage {
 
 
   initializeGroups(): void {
-  	this.groupList = this.filteredGroupList;
+    this.groupList = this.filteredGroupList;
     this.loadingProvider.hide();
   }
 
   initializePeople(): void {
-  	this.peopleList = this.filteredPeopleList;
+    this.peopleList = this.filteredPeopleList;
     this.loadingProvider.hide();
   }
 
@@ -87,10 +87,9 @@ export class ChatsPage {
   }
 
   ionViewWillEnter(){
-    
+   
     this.events.subscribe("SET_CURRENT_WEDDING_KEY", (currentWeddingKey) => {
 
-      this.loadingProvider.show();
       this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
       this.currentWeddingKeyRef.once('value', (data) => {
         this.currentWeddingKey = data.val();

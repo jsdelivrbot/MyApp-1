@@ -19,16 +19,23 @@ export class GroupchatPage {
 	groupChat: FirebaseListObservable<any>;
 	private message: any;
 	private newMessage: any;
+  public currentWeddingKeyRef: any;
+  public currentWeddingKey: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
   	this.group = navParams.data.group;
-  	this.groupChat = af.database.list('/Weddings/0/weddingGroups/' + this.group.groupId + '/groupChat', {
-  		query: {
-  			limitToLast: 10
-  		}
-  	});
+    this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
+    this.currentWeddingKeyRef.once('value', (data) => {
+      this.currentWeddingKey = data.val();
+    }).then((groupChat) => {
+    	this.groupChat = af.database.list('/Weddings/' + this.currentWeddingKey + '/weddingGroups/' + this.group.groupId + '/groupChat', {
+    		query: {
+    			limitToLast: 10
+    		}
+    	});
   	this.scrollBottom();
+    });
   }
 
   // Scroll to bottom of page after a short delay.

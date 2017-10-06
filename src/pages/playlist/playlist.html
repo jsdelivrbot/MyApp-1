@@ -8,7 +8,9 @@
 
   <ion-navbar color="amethyst">
     <ion-title>Playlist</ion-title>
-
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 
 
@@ -23,7 +25,7 @@
 
 <ion-list>
 	
-    <ion-item-sliding color = "amethyst-reverse" detail-push *ngFor="let song of songs | async" (click)="goToPlaylistDetails(song)">
+    <ion-item-sliding color = "amethyst-reverse" detail-push *ngFor="let song of songList" (click)="goToPlaylistDetails(song)">
     	<ion-item color = "amethyst-reverse" detail-push >
     		<ion-avatar item-left>
       			<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg">

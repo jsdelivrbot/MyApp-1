@@ -59,13 +59,13 @@ export class InfoPage {
   }
 
   ionViewWillEnter() {
-    this.events.subscribe("SET_CURRENT_WEDDING_KEY", (weddingKey) => {
-      this.selectedWeddingRef = firebase.database().ref('/Weddings/' + weddingKey);
+    this.events.subscribe("SET_CURRENT_WEDDING_KEY", (currentWeddingKey) => {
+      this.selectedWeddingRef = firebase.database().ref('/Weddings/' + currentWeddingKey);
       this.selectedWeddingRef.once('value', (data2) => {
         this.weddingName = data2.val().weddingName;
       });
     });
-  }  
+  } 
 
   initializeWeddings(){
     this.weddingListRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/weddingList');
