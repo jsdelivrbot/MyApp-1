@@ -8,6 +8,9 @@
 
   <ion-navbar color="amethyst">
     <ion-title align="center">Albums</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +19,7 @@
 <ion-content>
 
 	<ion-list>
-    	<ion-item color = amethyst-reverse detail-push *ngFor="let album of albums | async" (click)="goToAlbumDetails(album)">
+    	<ion-item color = amethyst-reverse detail-push *ngFor="let album of albumList" (click)="goToAlbumDetails(album)">
       	{{album.albumName}}
     	</ion-item>
 	</ion-list>

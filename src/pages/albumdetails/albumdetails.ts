@@ -22,48 +22,63 @@ export class AlbumdetailsPage {
 	album;
   photoList: any;
   photoCountRef: any;
-	public limit = 0;
-  public newLimit = 10;
+	public limit = 10;
   public needMorePhotos = false;
   public photoURL: any;
   public photoRef: any;
+  public photoListRef: any;
+  public photoListCount: any;
+  public currentWeddingKey: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider) {
     this.loadingProvider.show();
   	this.album = navParams.data.album;
-    this.initializePhotos(this.newLimit);
+    this.currentWeddingKey = navParams.data.currentWeddingKey;
+    this.initializePhotos(this.limit);
     this.loadingProvider.hide();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlbumdetailsPage');
+
     
   }
 
-  initializePhotos(newLimit){
-  this.photoCountRef = firebase.database().ref('/Weddings/0/weddingAlbums/' + this.album.$key + '/albumPhotos').limitToLast(this.newLimit);
-    this.photoCountRef.on('value', photoList => {
-    let photos = [];
-      photoList.forEach( photo => {
-        photos.push(photo.val());
+  initializePhotos(limit){
+    //get a count of total photos to compare to loaded photos to determine if need to load more photos
+    this.photoCountRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos');
+      this.photoCountRef.on('value', photoListCount => {
+        let photosCount = [];
+          photoListCount.forEach( photo => {
+            photosCount.push(photo.$key);
+          });
+          this.photoListCount = photosCount;
       });
-      this.photoList = photos;
-    });
-    this.needMorePhotos = true;
-    return this.needMorePhotos;
 
+    //load the photos to the limit and determine if load more photos is needed by comparing to total number of photos  
+    this.photoListRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos').limitToLast(limit);
+      this.photoListRef.on('value', photoList => {
+        let photos = [];
+          photoList.forEach( photo => {
+            photos.push(photo.val());
+          });
+          this.photoList = photos;
+            if(limit < this.photoListCount.length) {
+              this.needMorePhotos = true;
+            }
+            else{
+              this.needMorePhotos = false;
+            }
+      });
   }
 
 
-  loadMorePhotos(limit){
-    this.needMorePhotos = false;
-    if(this.newLimit == this.photoList.length){
-    this.newLimit = this.newLimit + limit;
-    this.initializePhotos(this.newLimit);
+  loadMorePhotos(newLimit){
+    this.limit = newLimit + this.limit;
+    this.initializePhotos(this.limit);
     this.scrollBottom();
-    }
-    return this.needMorePhotos;
   }
 
   private openGallery(){
@@ -119,7 +134,7 @@ uploadToFirebase(imageBlob) {
   var fileName = Date.now() + '_' + imageBlob.name;
 
   return new Promise((resolve, reject) => {
-    var fileRef = firebase.storage().ref('/Weddings/0/weddingAlbums/' + this.album.$key + '/' + fileName);
+    var fileRef = firebase.storage().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/' + fileName);
 
     var uploadTask = fileRef.put(imageBlob);
 
@@ -137,7 +152,7 @@ uploadToFirebase(imageBlob) {
 
 saveToPhotoAlbum(uploadSnapshot) {
   this.photoURL = uploadSnapshot.downloadURL;
-  this.photoRef = firebase.database().ref('/Weddings/0/weddingAlbums/' + this.album.$key + '/albumPhotos/');
+  this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos/');
   this.photoRef.push({
       photoURL: this.photoURL,
     });
