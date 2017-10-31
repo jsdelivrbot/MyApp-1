@@ -42,7 +42,6 @@ export class AlbumdetailsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlbumdetailsPage');
-
     
   }
 
@@ -93,7 +92,8 @@ export class AlbumdetailsPage {
       for (let i = 0; i < file_uris.length; i++) {
         this.makeFileIntoBlob(file_uris[i]).then((imageBlob) => {
           this.uploadToFirebase(imageBlob).then((uploadSnapshot: any) => {
-            this.saveToPhotoAlbum(uploadSnapshot);
+            // this.saveToPhotoAlbum(uploadSnapshot);
+            console.log("Uploaded Photos to Firebase");
           });
         });
       }
@@ -150,14 +150,14 @@ uploadToFirebase(imageBlob) {
   });
 }
 
-saveToPhotoAlbum(uploadSnapshot) {
-  this.photoURL = uploadSnapshot.downloadURL;
-  this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos/');
-  this.photoRef.push({
-      photoURL: this.photoURL,
-    });
+// saveToPhotoAlbum(uploadSnapshot) {
+//   this.photoURL = uploadSnapshot.downloadURL;
+//   this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos/');
+//   this.photoRef.push({
+//       photoURL: this.photoURL,
+//     });
 
-}
+// }
 
 
   // Scroll to bottom of page after a short delay.
