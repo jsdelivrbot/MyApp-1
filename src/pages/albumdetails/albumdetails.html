@@ -15,8 +15,8 @@
 
 <ion-content padding class="photoGallery" has-footer>
 
-  <ion-row wrap>
-    <ion-col width-33 *ngFor="let photo of photoList.slice().reverse()">
+  <ion-row wrap> <!-- .slice().reverse() -->
+    <ion-col width-33 *ngFor="let photo of photoList | async">
       <img src="{{photo.photoURL}}">
     </ion-col>
   </ion-row>

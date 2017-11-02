@@ -4,6 +4,8 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import firebase from 'firebase';
 import { ImagePicker } from 'ionic-native';
 import { LoadingProvider } from '../../providers/loading';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 declare var window: any;
 
@@ -20,22 +22,43 @@ declare var window: any;
 export class AlbumdetailsPage {
   @ViewChild(Content) content: Content;
 	album;
-  photoList: any;
+  //photoList: any;
   photoCountRef: any;
-	public limit = 10;
+	//public limit = 10;
+  limitSubject = new BehaviorSubject(10);
+  public initialLoad = 10;
   public needMorePhotos = false;
-  public photoURL: any;
+  //public photoURL: any;
+  public photoList: FirebaseListObservable<any>;
   public photoRef: any;
   public photoListRef: any;
   public photoListCount: any;
   public currentWeddingKey: any;
+  public timeStamp: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider) {
     this.loadingProvider.show();
   	this.album = navParams.data.album;
     this.currentWeddingKey = navParams.data.currentWeddingKey;
-    this.initializePhotos(this.limit);
+    //this.initializePhotos(this.limit);
+
+    this.initializePhotosCount();
+
+    this.photoList = af.database.list('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos', {
+      query: {
+          orderByChild: 'timeStamp',
+          limitToFirst: this.limitSubject
+      }
+    });
+
+    if(this.initialLoad < this.photoListCount.length) {
+        this.needMorePhotos = true;
+      }
+    else{
+        this.needMorePhotos = false;
+      }
+
     this.loadingProvider.hide();
 
   }
@@ -45,8 +68,7 @@ export class AlbumdetailsPage {
     
   }
 
-  initializePhotos(limit){
-    //get a count of total photos to compare to loaded photos to determine if need to load more photos
+  initializePhotosCount(){
     this.photoCountRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos');
       this.photoCountRef.on('value', photoListCount => {
         let photosCount = [];
@@ -55,29 +77,60 @@ export class AlbumdetailsPage {
           });
           this.photoListCount = photosCount;
       });
-
-    //load the photos to the limit and determine if load more photos is needed by comparing to total number of photos  
-    this.photoListRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos').limitToLast(limit);
-      this.photoListRef.on('value', photoList => {
-        let photos = [];
-          photoList.forEach( photo => {
-            photos.push(photo.val());
-          });
-          this.photoList = photos;
-            if(limit < this.photoListCount.length) {
-              this.needMorePhotos = true;
-            }
-            else{
-              this.needMorePhotos = false;
-            }
-      });
   }
+
+  // initializePhotos(limit){
+
+  //   //get a count of total photos to compare to loaded photos to determine if need to load more photos
+  //   this.photoCountRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos');
+  //     this.photoCountRef.on('value', photoListCount => {
+  //       let photosCount = [];
+  //         photoListCount.forEach( photo => {
+  //           photosCount.push(photo.$key);
+  //         });
+  //         this.photoListCount = photosCount;
+  //     });
+
+  //   //load the photos to the limit and determine if load more photos is needed by comparing to total number of photos  
+  //   this.photoListRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos').limitToLast(limit);
+  //     this.photoListRef.on('value', photoList => {
+  //       let photos = [];
+  //         photoList.forEach( photo => {
+  //           photos.push(photo.val());
+  //         });
+  //         this.photoList = photos;
+  //           if(limit < this.photoListCount.length) {
+  //             this.needMorePhotos = true;
+  //           }
+  //           else{
+  //             this.needMorePhotos = false;
+  //           }
+  //     });  
+  // }
 
 
   loadMorePhotos(newLimit){
-    this.limit = newLimit + this.limit;
-    this.initializePhotos(this.limit);
+   
+    this.loadingProvider.show();
+    //this.limit = newLimit + this.limit;
+    //console.log("Clicked Load More Photos: " + this.limit);
+
+    if(newLimit + 10 < this.photoListCount.length) {
+        this.needMorePhotos = true;
+      }
+    else{
+        this.needMorePhotos = false;
+      }
+
+      
+    //this.initializePhotos(this.limit);
+
+    this.limitSubject.next(newLimit + 10);
+
+    this.loadingProvider.hide();
+
     this.scrollBottom();
+
   }
 
   private openGallery(){
