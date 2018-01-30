@@ -2,13 +2,32 @@ page-albumdetails {
 
 .photoGallery{
 	background-color: #000000;
-	
-
+	overflow: hidden;
 }
-
 
 .img-loaded + ion-spinner {
   display:none;
+}
+
+.slide-zoom {
+    height: 100%;
+}
+
+.slide-title {
+    margin-top: 2.8rem;
+}
+
+.slide-image {
+	height: 100%;
+	width: 100%;
+}
+
+.no-scroll .scroll-content{
+     overflow: hidden;
+}
+
+.swiper-pagination-bullet-active {
+    background: #9b59b6;
 }
 
 

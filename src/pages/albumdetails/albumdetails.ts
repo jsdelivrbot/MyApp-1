@@ -22,13 +22,10 @@ declare var window: any;
 export class AlbumdetailsPage {
   @ViewChild(Content) content: Content;
 	album;
-  //photoList: any;
   photoCountRef: any;
-	//public limit = 10;
   limitSubject = new BehaviorSubject(10);
   public initialLoad = 10;
   public needMorePhotos = false;
-  //public photoURL: any;
   public photoList: FirebaseListObservable<any>;
   public photoRef: any;
   public photoListRef: any;
@@ -37,11 +34,11 @@ export class AlbumdetailsPage {
   public timeStamp: any;
 
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider) {
     this.loadingProvider.show();
   	this.album = navParams.data.album;
     this.currentWeddingKey = navParams.data.currentWeddingKey;
-    //this.initializePhotos(this.limit);
 
     this.initializePhotosCount();
 
@@ -79,41 +76,9 @@ export class AlbumdetailsPage {
       });
   }
 
-  // initializePhotos(limit){
-
-  //   //get a count of total photos to compare to loaded photos to determine if need to load more photos
-  //   this.photoCountRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos');
-  //     this.photoCountRef.on('value', photoListCount => {
-  //       let photosCount = [];
-  //         photoListCount.forEach( photo => {
-  //           photosCount.push(photo.$key);
-  //         });
-  //         this.photoListCount = photosCount;
-  //     });
-
-  //   //load the photos to the limit and determine if load more photos is needed by comparing to total number of photos  
-  //   this.photoListRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos').limitToLast(limit);
-  //     this.photoListRef.on('value', photoList => {
-  //       let photos = [];
-  //         photoList.forEach( photo => {
-  //           photos.push(photo.val());
-  //         });
-  //         this.photoList = photos;
-  //           if(limit < this.photoListCount.length) {
-  //             this.needMorePhotos = true;
-  //           }
-  //           else{
-  //             this.needMorePhotos = false;
-  //           }
-  //     });  
-  // }
-
 
   loadMorePhotos(newLimit){
-   
     this.loadingProvider.show();
-    //this.limit = newLimit + this.limit;
-    //console.log("Clicked Load More Photos: " + this.limit);
 
     if(newLimit + 10 < this.photoListCount.length) {
         this.needMorePhotos = true;
@@ -122,18 +87,18 @@ export class AlbumdetailsPage {
         this.needMorePhotos = false;
       }
 
-      
-    //this.initializePhotos(this.limit);
-
     this.limitSubject.next(newLimit + 10);
-
     this.loadingProvider.hide();
-
     this.scrollBottom();
 
   }
 
-  private openGallery(){
+  loadHiResPhotos(photo){
+
+
+  }
+
+  openGallery(){
     let options = {
     maximumImagesCount: 10,
     quality: 100
@@ -187,7 +152,7 @@ uploadToFirebase(imageBlob) {
   var fileName = Date.now() + '_' + imageBlob.name;
 
   return new Promise((resolve, reject) => {
-    var fileRef = firebase.storage().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/' + fileName);
+    var fileRef = firebase.storage().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos/' + fileName);
 
     var uploadTask = fileRef.put(imageBlob);
 
@@ -202,16 +167,6 @@ uploadToFirebase(imageBlob) {
     });
   });
 }
-
-// saveToPhotoAlbum(uploadSnapshot) {
-//   this.photoURL = uploadSnapshot.downloadURL;
-//   this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.album.albumId + '/albumPhotos/');
-//   this.photoRef.push({
-//       photoURL: this.photoURL,
-//     });
-
-// }
-
 
   // Scroll to bottom of page after a short delay.
   scrollBottom() {
