@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Content } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { PhotoGalleryModel } from '../photo-gallery-model/photo-gallery-model';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import firebase from 'firebase';
 import { ImagePicker } from 'ionic-native';
@@ -35,7 +37,7 @@ export class AlbumdetailsPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider, public modalCtrl: ModalController) {
     this.loadingProvider.show();
   	this.album = navParams.data.album;
     this.currentWeddingKey = navParams.data.currentWeddingKey;
@@ -94,7 +96,8 @@ export class AlbumdetailsPage {
   }
 
   loadHiResPhotos(photo){
-
+      let modal = this.modalCtrl.create(PhotoGalleryModel, { photo: photo });
+      modal.present();
 
   }
 

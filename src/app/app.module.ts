@@ -25,6 +25,7 @@ import { SearchmusicPage } from '../pages/searchmusic/searchmusic';
 import { SongrequestPage } from '../pages/songrequest/songrequest';
 import { PhotosPage } from '../pages/photos/photos';
 import { AlbumdetailsPage } from '../pages/albumdetails/albumdetails';
+import { PhotoGalleryModel } from '../pages/photo-gallery-model/photo-gallery-model';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { WeddingChoicePage } from '../pages/wedding-choice/wedding-choice';
@@ -97,6 +98,7 @@ const cloudSettings: CloudSettings = {
     Musicsearchfilter,
     PhotosPage,
     AlbumdetailsPage,
+    PhotoGalleryModel,
     ProfilePage,
     LoginPage,
     WeddingChoicePage,
@@ -140,6 +142,7 @@ const cloudSettings: CloudSettings = {
     SongrequestPage,
     PhotosPage,
     AlbumdetailsPage,
+    PhotoGalleryModel,
     ProfilePage,
     LoginPage,
     WeddingChoicePage,
