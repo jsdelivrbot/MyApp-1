@@ -17,7 +17,11 @@ Playlist manual add without search?
 Photos load more button Infinte scroll? or fix load more
 Photos more columns when page size grows for ipad
 Photos camera and photobooth
-Photos album multi-photo select to share or delete
+Photos album multi-photo select to share
 Photo Gallery Zoomed delete photo?
 Photo gallery Zoomed rotate picture
 Photo Gallery Zoomed share to fb, tw, insta
+
+
+In Progress:
+Photos album multi-photo select to delete

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Hammer } from "ionic-angular/gestures/hammer";
 import firebase from 'firebase';
 
@@ -22,7 +22,7 @@ export class PhotoGalleryModel {
 	public albumId: any;
 	public currentWeddingKey: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController) {
   	this.photo = navParams.get('photo');
   	this.albumId = navParams.get('albumId');
   	this.currentWeddingKey = navParams.get('currentWeddingKey');
@@ -52,7 +52,6 @@ export class PhotoGalleryModel {
   }
 
   rotateImg(rotateDeg){
-  	console.log(rotateDeg);
   	if((this.photo.photoRotation + rotateDeg) == 360){
   		this.photo.photoRotation = 0;
   	}
@@ -62,6 +61,34 @@ export class PhotoGalleryModel {
   	this.photoRef.update({
         photoRotation: this.photo.photoRotation
       });
+  }
+
+  deletePhoto(){
+  	this.photoRef.remove();
+  	this.closeGallery();
+  }
+
+  deleteAlert(){
+  	let confirm = this.alertCtrl.create({
+      title: 'Are you sure you want to delete this picture?',
+      message: 'Your picure will be permanetly removed',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'delete',
+          handler: () => {
+            console.log('Delete clicked');
+            this.deletePhoto();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

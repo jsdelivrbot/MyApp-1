@@ -54,10 +54,18 @@ photo-gallery-model {
 }
 
 
-
-.rotateBtn{
+.rotateIcon{
     padding-left: 2px;
     padding-right: 2px;
+    font-size: 1.2em;
+}
+
+.rotateBtn{
+	margin-right: -100px;
+}
+
+.trash{
+	margin-right: 100px;
 }
 
 
