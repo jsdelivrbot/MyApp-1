@@ -1,0 +1,23 @@
+TODO:
+social login
+store login credentials
+google maps api for navigation from info pages
+weblink on accommodations/registries for in app browser
+Recents Page
+individual Chats
+Chats user icon from profile avatar
+chats load previous messages
+Chats Uber API
+Chats Photos Upload in chat
+Chats select/zoom photo in chat message
+Chats gif/audio?
+Playlist Youtube video instead of album cover pic
+Playlist timeout on search error
+Playlist manual add without search?
+Photos load more button Infinte scroll? or fix load more
+Photos more columns when page size grows for ipad
+Photos camera and photobooth
+Photos album multi-photo select to share or delete
+Photo Gallery Zoomed delete photo?
+Photo gallery Zoomed rotate picture
+Photo Gallery Zoomed share to fb, tw, insta

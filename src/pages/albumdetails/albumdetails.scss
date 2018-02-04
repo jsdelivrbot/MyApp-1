@@ -30,6 +30,40 @@ page-albumdetails {
     background: #9b59b6;
 }
 
+.photoRotate0{
+	background-color: #000000;
+	overflow: hidden;
+
+}
+
+.photoRotate90{
+	transform: rotate(90deg);
+	background-color: #000000;
+	overflow: hidden;
+
+}
+
+.photoRotate180{
+	transform: rotate(180deg);
+	background-color: #000000;
+	overflow: hidden;
+
+}
+
+.photoRotate270{
+	transform: rotate(270deg);
+	background-color: #000000;
+	overflow: hidden;
+
+}
+
+.photoRotate360{
+	transform: rotate(360deg);
+	background-color: #000000;
+	overflow: hidden;
+
+}
+
 
 
 

@@ -13,4 +13,53 @@ photo-gallery-model {
     max-width: 100%;
 }
 
+.photoRotate90{
+	transform: rotate(90deg);
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 100%;
+
+}
+
+.photoRotate180{
+	transform: rotate(180deg);
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 100%;
+
+}
+
+.photoRotate270{
+	transform: rotate(270deg);
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 100%;
+
+}
+
+.photoRotate360{
+	transform: rotate(360deg);
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 100%;
+
+}
+
+
+
+.rotateBtn{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+
 }

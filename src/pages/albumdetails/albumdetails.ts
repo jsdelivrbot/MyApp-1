@@ -34,6 +34,7 @@ export class AlbumdetailsPage {
   public photoListCount: any;
   public currentWeddingKey: any;
   public timeStamp: any;
+  public photoRotation: any;
 
 
 
@@ -48,7 +49,7 @@ export class AlbumdetailsPage {
       query: {
           orderByChild: 'timeStamp',
           limitToFirst: this.limitSubject
-      }
+      } 
     });
 
     if(this.initialLoad < this.photoListCount.length) {
@@ -96,9 +97,27 @@ export class AlbumdetailsPage {
   }
 
   loadHiResPhotos(photo){
-      let modal = this.modalCtrl.create(PhotoGalleryModel, { photo: photo });
+      let modal = this.modalCtrl.create(PhotoGalleryModel, { photo: photo, albumId: this.album.albumId, currentWeddingKey: this.currentWeddingKey });
       modal.present();
 
+  }
+
+  photoRotateStyle(photoRotation) {
+    if(photoRotation == 0){
+      return "photoRotate0";
+    }
+    if(photoRotation == 90){
+      return "photoRotate90";
+    }
+    if(photoRotation == 180){
+      return "photoRotate180";
+    }
+    if(photoRotation == 270){
+      return "photoRotate270";
+    }
+    if(photoRotation == 360){
+      return "photoRotate360";
+    }
   }
 
   openGallery(){

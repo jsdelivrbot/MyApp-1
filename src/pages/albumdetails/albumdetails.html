@@ -17,7 +17,7 @@
 
   <ion-row wrap>
     <ion-col width-33 *ngFor="let photo of photoList | async" (click) = loadHiResPhotos(photo)>
-      <img src="{{photo.photoURL}}">
+      <img src="{{photo.photoURL}}" [ngClass]="photoRotateStyle(photo.photoRotation)" />
     </ion-col>
   </ion-row>
 
