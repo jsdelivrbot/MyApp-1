@@ -123,7 +123,8 @@ export class AlbumdetailsPage {
   openGallery(){
     let options = {
     maximumImagesCount: 10,
-    quality: 100
+    quality: 100,
+    correctOrientation: true
     }
 
     ImagePicker.getPictures(options).then((file_uris) => {

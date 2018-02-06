@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController, ActionSheetController } from 'ionic-angular';
 import { Hammer } from "ionic-angular/gestures/hammer";
 import firebase from 'firebase';
 
@@ -21,13 +21,15 @@ export class PhotoGalleryModel {
 	public photoRef: any;
 	public albumId: any;
 	public currentWeddingKey: any;
+	public currentUser: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController) {
   	this.photo = navParams.get('photo');
   	this.albumId = navParams.get('albumId');
   	this.currentWeddingKey = navParams.get('currentWeddingKey');
   	this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.albumId + '/albumPhotos/' + this.photo.$key)
-
+  	this.currentUser = firebase.auth().currentUser.uid;
+  	console.log(this.currentUser); 
   }
 
   ionViewDidLoad() {
@@ -45,6 +47,9 @@ export class PhotoGalleryModel {
 	        this.closeGallery();
     	}
 	});
+	gesture.on('press', e => {
+        this.photoActionSheet();
+	});
   }
 
   closeGallery() {
@@ -61,6 +66,10 @@ export class PhotoGalleryModel {
   	this.photoRef.update({
         photoRotation: this.photo.photoRotation
       });
+  }
+
+  makeProfilePic(){
+  	console.log(this.photo.hiRes);
   }
 
   deletePhoto(){
@@ -90,5 +99,41 @@ export class PhotoGalleryModel {
     });
     confirm.present();
   }
+
+  photoActionSheet(){
+	  	let actionSheet = this.actionSheetCtrl.create({
+	      buttons: [
+	        {
+	          text: 'Delete Photo',
+	          role: 'destructive',
+	          handler: () => {
+	            this.deleteAlert();
+	          }
+	        },{
+	          text: 'Share to Facebook',
+	          handler: () => {
+	            console.log('Share to Facebook clicked');
+	          }
+	        },{
+	          text: 'Share to Twitter',
+	          handler: () => {
+	          	console.log('Share to Twitter clicked');
+	          }
+	        },{
+	          text: 'Share to Instagram',
+	          handler: () => {
+	          	console.log('Share to Instragram clicked');
+	          }   
+	        },{
+	          text: 'Cancel',
+	          role: 'cancel',
+	          handler: () => {
+	            console.log('Cancel clicked');
+	          }
+	        }
+	      ]
+	    });
+	    actionSheet.present();
+	  }
 
 }

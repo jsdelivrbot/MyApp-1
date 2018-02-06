@@ -18,10 +18,14 @@ Photos load more button Infinte scroll? or fix load more
 Photos more columns when page size grows for ipad
 Photos camera and photobooth
 Photos album multi-photo select to share
-Photo Gallery Zoomed delete photo?
+Photos album multi-photo select to delete
+Photos album multi-photo select to delete
+
 Photo gallery Zoomed rotate picture
 Photo Gallery Zoomed share to fb, tw, insta
+BUG - fix for action sheet to kill on panup/pandown
 
+BUG - Fix Profile Pic folder where photoURL and hiRes is under userProfile-->userId-->profilePic-->hiRes/photoURL
 
 In Progress:
-Photos album multi-photo select to delete
+Photo Gallery Zoomed make profile picture feature

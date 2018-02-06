@@ -107,6 +107,10 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
     const timeStamp = -Date.now();
     const photoRotation = 0;
     // Add the URLs to the Database
-    return admin.database().ref('/' + dbPath).push({hiRes: fileUrl, photoURL: thumbFileUrl, timeStamp: timeStamp, photoRotation: photoRotation});
+    if(dbPath.includes("userProfile", 0)){
+      return;
+    }
+    else{
+    return admin.database().ref('/' + dbPath).push({hiRes: fileUrl, photoURL: thumbFileUrl, timeStamp: timeStamp, photoRotation: photoRotation});}
   }).then(() => console.log('Thumbnail URLs saved to database.'));
 });

@@ -10,19 +10,25 @@
 	
 		<ion-buttons left>
 			<button ion-button icon-only (click) = closeGallery()>
-			<ion-icon name="arrow-back"></ion-icon>
+			<ion-icon name="close"></ion-icon>
 			</button>
 		</ion-buttons>
 
-		<ion-buttons align="center">
+		<ion-buttons right>
 	      <button ion-button outline item-end icon-left class="rotateBtn" (click)="rotateImg(90)">
 	        <ion-icon name="refresh-circle" class="rotateIcon">  Rotate</ion-icon>
 	      </button>
 	    </ion-buttons>
 
 	    <ion-buttons right>
-	      <button ion-button icon-only class="trash" (click)="deleteAlert()">
-	        <ion-icon name="trash"></ion-icon>
+	      <button ion-button outline item-end icon-left class="makeProfileBtn" (click)="makeProfilePic()">
+	        <ion-icon name="person" class="makeProfileIcon">  Make Profile Picture</ion-icon>
+	      </button>
+	    </ion-buttons>
+
+	    <ion-buttons right>
+	      <button ion-button icon-only (click)="photoActionSheet()">
+	        <ion-icon name="more"></ion-icon>
 	      </button>
 	    </ion-buttons>
 
@@ -33,16 +39,6 @@
 
 
 <ion-content padding class="photoGallery">
-
-  <ion-fab top right edge>
-    <button ion-fab mini color="amethyst"><ion-icon name="share"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab color="primary"><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab color="white"><ion-icon name="logo-twitter" color="primary"></ion-icon></button>
-      <button ion-fab color="red"><ion-icon name="logo-instagram" color="white"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
-
 
 	<ion-slides>
 

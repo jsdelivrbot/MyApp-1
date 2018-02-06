@@ -41,15 +41,18 @@ export class ProfilePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public profileData: ProfileData, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public platform: Platform, public loadingProvider: LoadingProvider) {
   this.loadingProvider.show();
   this.profileData = profileData;
-  this.profileData.getUserProfile().on('value', (data) => {
-      this.userProfile = data.val();
-      this.loadingProvider.hide();
-    });
-
+  this.getUserProfile();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  getUserProfile(){
+    this.profileData.getUserProfile().on('value', (data) => {
+      this.userProfile = data.val();
+      this.loadingProvider.hide();
+    });
   }
 
   getPicture() {
@@ -64,8 +67,6 @@ export class ProfilePage {
     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: Camera.DestinationType.FILE_URI,
     quality: 100,
-    targetWidth: 150,
-    targetHeight: 150,
     encodingType: Camera.EncodingType.JPEG,
     correctOrientation: true
   }).then((_imagePath) => {
@@ -81,10 +82,11 @@ export class ProfilePage {
     //alert('file uploaded successfully  ' + _uploadSnapshot.downloadURL);
 
     // store reference to storage in database
+    this.loadingProvider.hide();
     return this.saveToUserProfile(_uploadSnapshot);
 
   }).then((_uploadSnapshot: any) => {
-    //alert('file saved to asset catalog successfully  ');
+
   }, (_error) => {
     alert('Error ' + (_error.message || _error));
   });
@@ -139,10 +141,8 @@ uploadToFirebase(_imageBlob) {
 saveToUserProfile(_uploadSnapshot) {
   this.photoURL = _uploadSnapshot.downloadURL;
   this.profileData.updateProfilePic(this.photoURL);
-  this.loadingProvider.hide();
 
 }
-
 
   updateName(){
   let alert = this.alertCtrl.create({
