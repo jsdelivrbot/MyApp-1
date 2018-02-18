@@ -88,7 +88,7 @@ export class GroupchatPage {
                 type: 'text',
                 photoURL: 'assets/images/profile_avatar.png',
                 message: this.newMessage,
-                timeStamp: Date.now()
+                timeStamp: -Date.now()
               }
             });
           }

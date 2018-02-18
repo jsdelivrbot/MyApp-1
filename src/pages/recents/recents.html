@@ -8,11 +8,26 @@
 
   <ion-navbar color="amethyst">
     <ion-title align="center">Recents</ion-title>
+    <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+	<ion-list>
+		<ion-item color = "amethyst-reverse" detail-push *ngFor="let chat of recentChats">
+				<h2 class="groupName" *ngIf="!chat.isUnread">{{chat?.groupName}}</h2>
+				<p class="chatBody" *ngIf="!chat.isUnread">{{chat?.sender}}: {{chat?.message}}</p>
+				<h2 class="groupNameBold" *ngIf="chat.isUnread">{{chat?.groupName}}</h2>
+				<p class="chatBodyBold" *ngIf="chat.isUnread">{{chat?.sender}}: {{chat?.message}}</p>
+				<ion-avatar item-left>
+      					<img src={{chat?.photoURL}}>
+    			</ion-avatar>
+		</ion-item>
+  </ion-list>
 
 </ion-content>

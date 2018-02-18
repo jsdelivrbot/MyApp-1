@@ -29,7 +29,6 @@ export class PhotoGalleryModel {
   	this.currentWeddingKey = navParams.get('currentWeddingKey');
   	this.photoRef = firebase.database().ref('/Weddings/' + this.currentWeddingKey + '/weddingAlbums/' + this.albumId + '/albumPhotos/' + this.photo.$key)
   	this.currentUser = firebase.auth().currentUser.uid;
-  	console.log(this.currentUser); 
   }
 
   ionViewDidLoad() {
