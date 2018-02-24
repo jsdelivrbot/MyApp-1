@@ -25,6 +25,7 @@ public songs: any;
 public currentWeddingKeyRef: any;
 public currentWeddingKey: any;
 public songList: FirebaseListObservable<any>;
+public songId: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public musicSearch: MusicSearch, public loadingProvider: LoadingProvider, af: AngularFire) {
@@ -41,23 +42,33 @@ public songList: FirebaseListObservable<any>;
   }
 
 	loadSongs(){
-  		this.musicSearch.load(this.songName, this.artistName)
-  			.then(data1 => {
-    		this.songs = data1;
-    		this.loadingProvider.hide();
-  			});
+    if(this.songName == null || this.songName == ""){
+      this.songName = " ";
+    }
+		this.musicSearch.load(this.songName, this.artistName)
+			.then(data1 => {
+  		this.songs = data1;
+  		this.loadingProvider.hide();
+			});
 	}
 
-	addSongRequest(title: string, artist_name: string, track_youtube_id: string) {
+
+	addSongRequest(song: string, artist: string, photoURL: string) {
 		this.loadingProvider.show();
-    	this.songList.push({
-    	name: title,
-    	artist: artist_name,
-    	songphoto: track_youtube_id,
-    	});
-    	this.navCtrl.push(PlaylistPage);
-    	this.navCtrl.setRoot(PlaylistPage);
-    	this.loadingProvider.hide();
+
+    var songId = this.songList.push({
+    song: song,
+    artist: artist,
+    photoURL: photoURL
+    }).key;
+
+    this.songList.update(songId, {songId: songId});
+
+
+  	//this.navCtrl.push(PlaylistPage);
+  	this.navCtrl.setRoot(PlaylistPage);
+  	this.loadingProvider.hide();
+
 
 	}	
 

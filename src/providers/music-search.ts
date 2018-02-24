@@ -26,10 +26,11 @@ export class MusicSearch {
 
   		// don't have the data yet
   		return new Promise(resolve => {
-    	this.http.get("http://api.musicgraph.com/api/v2/track/search?api_key=026bcbd4dbd37c7795830166fec48013&artist_name=" + artistName + "&title=" + songName + "&limit=25&fields=artist_name,title,track_youtube_id")
-      		.map(res => res.json().data)
+        this.http.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + songName + "&artist=" + artistName + "&limit=25&api_key=bd07137e1c5bd761314625ca6f559afa&format=json")
+    	//this.http.get("http://api.musicgraph.com/api/v2/track/search?api_key=026bcbd4dbd37c7795830166fec48013&artist_name=" + artistName + "&title=" + songName + "&limit=25&fields=artist_name,title,track_youtube_id")
+      		.map(res => res.json())
       		.subscribe(data => {
-        	this.data1 = data;
+        	this.data1 = data.results.trackmatches.track;
         	resolve(this.data1);
       		});
   		});

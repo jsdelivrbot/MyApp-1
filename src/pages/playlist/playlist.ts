@@ -29,7 +29,7 @@ export class PlaylistPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire, public loadingProvider: LoadingProvider, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingProvider: LoadingProvider, public events: Events, af: AngularFire) {
     this.loadingProvider.show();
     this.currentWeddingKeyRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid + '/currentWedding/');
     this.currentWeddingKeyRef.once('value', (data) => {
@@ -54,7 +54,8 @@ export class PlaylistPage {
             songs.push(song.val());
           });
         this.songList = songs;
-      });
+        console.log(this.songList);
+     });
 
   } 
 
@@ -66,8 +67,8 @@ export class PlaylistPage {
 		this.navCtrl.push(SearchmusicPage);
 	}
 
-	deleteSongRequest(songId: string){
-  		this.songs.remove(songId);
+	deleteSongRequest(song){
+    this.songsRef.child(song.songId).remove();
 	}
 
   ionViewDidLoad() {

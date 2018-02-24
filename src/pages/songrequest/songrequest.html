@@ -16,12 +16,12 @@
 <ion-content class="home">
   
 	<ion-list>
-    	<ion-item *ngFor="let song of songs | musicsearchfilter" (click)="addSongRequest(song.title, song.artist_name, song.track_youtube_id)">
+    	<ion-item *ngFor="let song of songs | musicsearchfilter" (click)="addSongRequest(song.name, song.artist, song.image[3]['#text'])">
       		<ion-avatar item-left>
-       			<img src="https://i1.ytimg.com/vi/{{song.track_youtube_id}}/hqdefault.jpg">
+       			<img src="{{song?.image[3]['#text']}}">
       		</ion-avatar>
-      	<h2>{{song.artist_name}}</h2>
-      	<p>{{song.title}}</p>
+      	<h2>{{song?.artist}}</h2>
+      	<p>{{song?.name}}</p>
     	</ion-item>
   	</ion-list>
 

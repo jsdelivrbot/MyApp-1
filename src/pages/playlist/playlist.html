@@ -28,14 +28,14 @@
     <ion-item-sliding color = "amethyst-reverse" detail-push *ngFor="let song of songList" (click)="goToPlaylistDetails(song)">
     	<ion-item color = "amethyst-reverse" detail-push >
     		<ion-avatar item-left>
-      			<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg">
+      			<img src={{song.photoURL}}>
     		</ion-avatar>
-      	<h2>{{song.name}}</h2>
+      	<h2>{{song.song}}</h2>
       	<p> - {{song.artist}}</p>
       	</ion-item>
 
     		<ion-item-options slide="left">
-      			<button ion-button color="danger" (click)="deleteSongRequest(song.$key)"><ion-icon name="trash"></ion-icon> Delete</button>
+      			<button ion-button color="danger" (click)="deleteSongRequest(song)"><ion-icon name="trash"></ion-icon> Delete</button>
     		</ion-item-options>
 
     </ion-item-sliding>

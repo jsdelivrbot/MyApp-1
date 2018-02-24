@@ -3,7 +3,6 @@ Login social login
 Login store login credentials
 Info google maps api for navigation from info pages
 Info weblink on accommodations/registries for in app browser
-
 Chats individual Chats
 Chats user icon from profile avatar
 Chats load previous messages
@@ -11,8 +10,7 @@ Chats Uber API
 Chats Photos Upload in chat
 Chats select/zoom photo in chat message
 Chats gif/audio?
-Playlist Youtube video instead of album cover pic
-Playlist timeout on search error
+Playlist Youtube video or play song instead of album cover pic
 Playlist manual add without search?
 Photos load more button Infinte scroll? or fix load more
 Photos more columns when page size grows for ipad
@@ -24,7 +22,9 @@ Photo Gallery Zoomed share to fb, tw, insta
 BUG - Photo gallery Zoomed rotate picture not correct on phone
 BUG - Gallery Zoomed fix for action sheet to kill on panup/pandown
 BUG - make status bar amethyst
+BUG - Playlist timeout on search error
 
 
 In Progress:
-Recents Page - working writing to recent, but currently the .on is in a bad loop writing to users recents
+Recents Page - working writing to recent - need to update backend to push photoURL from group and userNames, etc...
+

@@ -7,7 +7,7 @@
 <<ion-header>
 
   <ion-navbar color="amethyst">
-    <ion-title>{{song.name}}</ion-title>
+    <ion-title>{{song.song}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,16 +18,13 @@
 
 <ion-card class="card">
 	
-	-<img src="https://i1.ytimg.com/vi/{{song.songphoto}}/hqdefault.jpg" class="songPhoto"/>
+	<img src={{song.photoURL}} class="songPhoto"/>
 	
 	
 	<ion-card-content class="songDescription">
 		<ion-card-title>
       		{{song.artist}}
       	</ion-card-title>
-      		<p>
-      		{{song.name}}
-    		</p>
   	</ion-card-content>
 </ion-card>
 
