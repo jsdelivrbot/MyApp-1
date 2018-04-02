@@ -7,6 +7,7 @@ import { RecentsPage } from '../pages/recents/recents';
 import { ChatsPage } from '../pages/chats/chats';
 import { GroupAddPage } from '../pages/group-add/group-add';
 import { GroupchatPage } from '../pages/groupchat/groupchat';
+import { IndividualchatPage } from '../pages/individualchat/individualchat';
 import { EventsPage } from '../pages/events/events';
 import { EventsAddPage } from '../pages/events-add/events-add';
 import { EventEditPage } from '../pages/event-edit/event-edit';
@@ -79,6 +80,7 @@ const cloudSettings: CloudSettings = {
     ChatsPage,
     GroupAddPage,
     GroupchatPage,
+    IndividualchatPage,
     EventsPage,
     EventsAddPage,
     EventEditPage,
@@ -124,6 +126,7 @@ const cloudSettings: CloudSettings = {
     ChatsPage,
     GroupAddPage,
     GroupchatPage,
+    IndividualchatPage,
     EventsPage,
     EventsAddPage,
     EventEditPage,

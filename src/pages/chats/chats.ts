@@ -7,6 +7,7 @@ import { LoadingProvider } from '../../providers/loading';
 import { GroupAddPage } from '../group-add/group-add';
 import { FormControl } from '@angular/forms';
 import { GroupchatPage } from '../groupchat/groupchat';
+import { IndividualchatPage } from '../individualchat/individualchat';
 
 
 
@@ -123,11 +124,15 @@ export class ChatsPage {
   }
 
   goToGroupAddPage(){
-  this.navCtrl.push(GroupAddPage);
+    this.navCtrl.push(GroupAddPage);
   }
 
   goToGroupChat(group){
-  this.navCtrl.push(GroupchatPage, { group: group });
+    this.navCtrl.push(GroupchatPage, { group: group });
+  }
+
+  goToIndividualChat(person){
+    this.navCtrl.push(IndividualchatPage, { person: person });
   }
 
   searchGroups(searchGroupBar) {

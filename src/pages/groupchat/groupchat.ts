@@ -25,6 +25,10 @@ export class GroupchatPage {
   public userProfileRecentChatRef: any;
   public usersToSendRecentNotification: any;
   public userList: any;
+  public userProfileRef: any;
+  public firstName: any;
+  public lastName: any;
+  public fullName: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
@@ -48,6 +52,7 @@ export class GroupchatPage {
   scrollBottom() {
     var that = this;
     setTimeout(function() {
+      that.newMessage = '';
       that.content.scrollToBottom();
     }, 300);
   }
@@ -80,29 +85,28 @@ export class GroupchatPage {
           if(this.userList[i].chatting == false){
             console.log('user: ' + this.userList[i].userId);
             let chatKey = this.group.groupId;
-            this.userProfileRecentChatRef = firebase.database().ref('/userProfile/' + this.userList[i].userId + '/recentChats');
-            this.userProfileRecentChatRef.update({
-              [chatKey]: {
-                isUnread: true,
-                sender: firebase.auth().currentUser.uid,
-                type: 'text',
-                photoURL: 'assets/images/profile_avatar.png',
-                message: this.newMessage,
-                timeStamp: -Date.now()
-              }
+            this.userProfileRef = firebase.database().ref('/userProfile/' + firebase.auth().currentUser.uid);
+            this.userProfileRef.once('value', (data) => {
+              this.firstName = data.val().firstname;
+              this.lastName = data.val().lastname;
+              this.fullName = this.firstName + " " + this.lastName;
+              this.userProfileRecentChatRef = firebase.database().ref('/userProfile/' + this.userList[i].userId + '/recentChats');
+              this.userProfileRecentChatRef.update({
+                [chatKey]: {
+                  groupName: this.group.groupName,
+                  isUnread: true,
+                  sender: this.fullName,
+                  type: 'text',
+                  photoURL: 'assets/images/profile_avatar.png',
+                  message: this.newMessage,
+                  timeStamp: -Date.now()
+                }
+              });
             });
           }
         }
       });
     }
-    // this.userProfileRecentChatRef = firebase.database().ref('/userProfile/' + this.userId + '/recentChats');
-    // this.userProfileRecentChatRef.push({
-    //   sender: firebase.auth().currentUser.uid,
-    //   type: 'text',
-    //   photoURL: 'assets/images/profile_avatar.png',
-    //   message: this.newMessage
-    // });
-    //}
 
   // Check if the user is the sender of the message.
   isSender(message) {
@@ -124,7 +128,6 @@ export class GroupchatPage {
         });
         // Clear messagebox.
         this.updateUserProfileRecentChats();
-        this.newMessage = '';
         this.scrollBottom();
     }
 
